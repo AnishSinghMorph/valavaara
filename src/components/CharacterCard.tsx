@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface CharacterCardProps {
@@ -26,11 +27,12 @@ export function CharacterCard({
                 {/* Front */}
                 <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-lg">
                     {frontImage ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
+                        <Image
                             src={frontImage}
                             alt={name}
-                            className="absolute inset-0 w-full h-full object-cover"
+                            fill
+                            sizes="176px"
+                            className="object-cover"
                         />
                     ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center">

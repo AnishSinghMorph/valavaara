@@ -52,7 +52,7 @@ export function ShortsHubClient() {
               Watch <span className="gradient-text">Shorts</span>
             </h1>
             <p className="text-foreground-muted">
-              Adorable clips from Valavaara — tap for sound!
+              Click on any video to see full screen and download 📥
             </p>
           </motion.div>
 

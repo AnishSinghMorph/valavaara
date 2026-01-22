@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, Share2 } from "lucide-react";
+import { Play } from "lucide-react";
 import { ShareButton } from "./ShareButton";
 
 interface ShortCardProps {
@@ -32,11 +33,12 @@ export function ShortCard({
             <Link href={`/watch/shorts/${slug}`}>
                 <div className="relative aspect-[9/16] overflow-hidden">
                     {thumbnail ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
+                        <Image
                             src={thumbnail}
                             alt={title}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            fill
+                            sizes="(max-width: 640px) 50vw, 25vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                     ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent-pink/20 to-secondary/30 flex items-center justify-center">
@@ -103,11 +105,12 @@ export function ShortCardHorizontal({
             >
                 <div className="relative aspect-[9/16] rounded-xl overflow-hidden mb-2">
                     {thumbnail ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
+                        <Image
                             src={thumbnail}
                             alt={title}
-                            className="absolute inset-0 w-full h-full object-cover"
+                            fill
+                            sizes="112px"
+                            className="object-cover"
                         />
                     ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center">

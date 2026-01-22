@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
+import { Play, Pause, Volume2, Maximize } from "lucide-react";
 
 interface VideoPlayerProps {
     src: string;
@@ -34,11 +35,12 @@ export function VideoPlayer({
             {/* Placeholder for actual video - will use real video when assets are provided */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
                 {poster ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                         src={poster}
                         alt={title || "Video thumbnail"}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 768px"
+                        className="object-cover"
                     />
                 ) : (
                     <div className="text-center text-white">
@@ -120,11 +122,12 @@ export function VideoThumbnail({
             onClick={onClick}
         >
             {thumbnail ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                     src={thumbnail}
                     alt={title}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="object-cover"
                 />
             ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center">

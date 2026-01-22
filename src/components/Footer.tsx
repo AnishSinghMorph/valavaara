@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BOOKING_URL } from "@/data/content";
 
 export function Footer() {
@@ -9,10 +10,11 @@ export function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-2">
                         <div className="flex items-center gap-2 mb-4">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img 
+                            <Image 
                                 src="/assets/logos/morphWhite.png" 
                                 alt="Morph Productions" 
+                                width={144}
+                                height={48}
                                 className="h-12 w-auto"
                             />
                         </div>

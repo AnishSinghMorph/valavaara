@@ -3,8 +3,9 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, Ticket, BookOpen, Download, Film, Music, Clapperboard, ImageIcon } from "lucide-react";
+import { Play, Ticket, Download, Film, Clapperboard, ImageIcon } from "lucide-react";
 import { CharacterCard } from "@/components/CharacterCard";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
@@ -87,11 +88,13 @@ function HomePageContent() {
             transition={{ delay: 0.1 }}
             className="mb-4"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image 
               src="/assets/logos/Eng.png" 
               alt="Valavaara" 
+              width={400}
+              height={160}
               className="mx-auto h-24 md:h-32 lg:h-40 w-auto"
+              priority
             />
           </motion.h1>
 
@@ -116,11 +119,13 @@ function HomePageContent() {
             <div>
               <div className="aspect-video relative">
                 {/* Trailer Thumbnail Image */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
+                <Image 
                   src="/assets/images/trailer-thumbnail.jpg" 
                   alt="Valavaara Official Trailer"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover"
+                  priority
                 />
               </div>
 
@@ -253,17 +258,10 @@ function HomePageContent() {
               >
                 <Link href="/watch/shorts">
                   <div className="card overflow-hidden group cursor-pointer">
-                    <div className="relative aspect-[9/16]">
-                      <video
-                        src={short.videoUrl}
-                        muted
-                        loop
-                        playsInline
-                        autoPlay
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                    <div className="relative aspect-[9/16] bg-gradient-to-br from-primary/30 via-accent-pink/20 to-secondary/30">
+                      {/* Thumbnail placeholder with play button */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                           <Play size={20} fill="var(--primary)" className="text-primary ml-1" />
                         </div>
                       </div>
@@ -362,11 +360,14 @@ function HomePageContent() {
                 className="card overflow-hidden group"
               >
                 <div className="relative aspect-square overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover transition-transform group-hover:scale-105"
+                    loading={i < 3 ? undefined : "lazy"}
+                    priority={i < 3}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -389,12 +390,16 @@ function HomePageContent() {
             viewport={{ once: true }}
             className="card overflow-hidden group relative"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/promotions/promotion.jpeg"
-              alt="Valavaara Promotion"
-              className="w-full h-auto object-cover"
-            />
+            <div className="relative aspect-video">
+              <Image
+                src="/assets/promotions/promotion.jpeg"
+                alt="Valavaara Promotion"
+                fill
+                sizes="(max-width: 768px) 100vw, 1200px"
+                className="object-cover"
+                loading="lazy"
+              />
+            </div>
             <a
               href="/assets/promotions/promotion.jpeg"
               download="valavaara-promotion.jpeg"

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { motion } from "framer-motion";
 import {
     ArrowLeft,
@@ -15,29 +16,120 @@ import {
     Ticket,
     Instagram,
     Star,
+    Play,
     Volume2,
     VolumeX,
-    Share2,
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
 import { PosterGallery } from "@/components/PosterGallery";
+import { VideoModal, setCurrentModal } from "@/components/VideoModal";
 import { pressAssets, captions, shorts, BOOKING_URL } from "@/data/content";
 
 type CaptionLang = "en" | "kn" | "ta";
+
+// VideoCard component for shorts - autoplay muted, click to open modal
+function VideoCard({ 
+    videoUrl, 
+    title, 
+    duration, 
+    slug, 
+    index 
+}: { 
+    videoUrl: string; 
+    title: string; 
+    duration: string;
+    slug?: string; 
+    index: number;
+}) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMuted, setIsMuted] = useState(true);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    const openModal = useCallback(() => {
+        setCurrentModal(() => setIsModalOpen(false));
+        setIsModalOpen(true);
+        // Pause inline video when modal opens
+        if (videoRef.current) {
+            videoRef.current.pause();
+        }
+    }, []);
+
+    const closeModal = useCallback(() => {
+        setIsModalOpen(false);
+        // Resume inline video when modal closes
+        if (videoRef.current) {
+            videoRef.current.play().catch(() => {});
+        }
+    }, []);
+
+    const toggleMute = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+        setIsMuted(prev => !prev);
+        if (videoRef.current) {
+            videoRef.current.muted = !videoRef.current.muted;
+        }
+    }, []);
+
+    return (
+        <>
+            <div className="card overflow-hidden group cursor-pointer" onClick={openModal}>
+                <div className="aspect-[9/16] relative bg-black">
+                    {/* Autoplay muted video */}
+                    <video
+                        ref={videoRef}
+                        src={videoUrl}
+                        className="w-full h-full object-cover"
+                        muted
+                        loop
+                        playsInline
+                        autoPlay
+                    />
+                    {/* Play button overlay on hover */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors opacity-0 group-hover:opacity-100">
+                        <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                            <Play size={20} fill="var(--primary)" className="text-primary ml-0.5" />
+                        </div>
+                    </div>
+                    {/* Mute toggle */}
+                    <button
+                        onClick={toggleMute}
+                        className="absolute bottom-2 left-2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full z-10"
+                    >
+                        {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                    </button>
+                    {/* Download button */}
+                    <a
+                        href={videoUrl}
+                        download={`valavaara-${slug || `short-${index + 1}`}.mp4`}
+                        className="absolute bottom-2 right-2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full z-10"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <Download size={18} />
+                    </a>
+                </div>
+                <div className="p-3">
+                    <p className="text-sm font-medium truncate">{title}</p>
+                    <p className="text-xs text-foreground-muted">{duration}</p>
+                </div>
+            </div>
+            <VideoModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                videoSrc={videoUrl}
+                title={title}
+                downloadFileName={slug ? `valavaara-${slug}.mp4` : `valavaara-short-${index + 1}.mp4`}
+            />
+        </>
+    );
+}
 
 export function PressKitClient() {
     const [copiedCaption, setCopiedCaption] = useState<string | null>(null);
     const [selectedLang, setSelectedLang] = useState<CaptionLang>("en");
     const [hoveredCelebrity, setHoveredCelebrity] = useState<number | null>(null);
-    const [mutedVideos, setMutedVideos] = useState<Record<string, boolean>>(() => {
-        const initial: Record<string, boolean> = {};
-        shorts.forEach(short => {
-            initial[short.id] = true;
-        });
-        return initial;
-    });
-    const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
+    const [celebrityImagesLoaded, setCelebrityImagesLoaded] = useState<Record<number, { eng: boolean; knd: boolean }>>({});
+    const [reactionModalOpen, setReactionModalOpen] = useState(false);
 
     const copyToClipboard = async (text: string, id: string) => {
         try {
@@ -49,16 +141,23 @@ export function PressKitClient() {
         }
     };
 
-    const toggleMute = (videoId: string) => {
-        setMutedVideos(prev => ({
-            ...prev,
-            [videoId]: !prev[videoId]
-        }));
-        const video = videoRefs.current[videoId];
-        if (video) {
-            video.muted = !video.muted;
-        }
-    };
+    // Preload the other language image on hover
+    const preloadCelebrityImage = useCallback((index: number, lang: 'eng' | 'knd', url: string) => {
+        if (celebrityImagesLoaded[index]?.[lang]) return;
+        const img = new window.Image();
+        img.src = url;
+        img.onload = () => {
+            setCelebrityImagesLoaded(prev => ({
+                ...prev,
+                [index]: { ...prev[index], [lang]: true }
+            }));
+        };
+    }, [celebrityImagesLoaded]);
+
+    const openReactionModal = useCallback(() => {
+        setCurrentModal(() => setReactionModalOpen(false));
+        setReactionModalOpen(true);
+    }, []);
 
     const shareToWhatsApp = (text: string) => {
         const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
@@ -142,13 +241,14 @@ export function PressKitClient() {
                                     <img
                                         src={promo.url}
                                         alt={promo.name}
-                                        className="w-full h-64 object-cover"
+                                        className="w-full h-auto"
+                                        loading={i < 3 ? undefined : "lazy"}
                                     />
                                     <div className="absolute bottom-2 right-2">
                                         <a
                                             href={promo.url}
                                             download={promo.name.toLowerCase().replace(/\s+/g, '-')}
-                                            className="btn btn-secondary text-xs py-1.5 px-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                            className="btn btn-secondary text-xs py-1.5 px-2 flex items-center gap-1"
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             <Download size={12} />
@@ -173,12 +273,13 @@ export function PressKitClient() {
                             </h2>
                         </div>
                         <div className="card overflow-hidden">
-                            <div className="relative">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
+                            <div className="relative aspect-[16/9]">
+                                <NextImage
                                     src={pressAssets.award.image}
                                     alt={pressAssets.award.title}
-                                    className="w-full h-auto object-cover"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 800px"
+                                    className="object-cover"
                                 />
                             </div>
                             <div className="p-3 bg-gradient-to-r from-yellow-600 to-orange-600 text-white">
@@ -222,13 +323,14 @@ export function PressKitClient() {
                                         <img
                                             src={still.url}
                                             alt={still.name}
-                                            className="h-48 md:h-64 w-auto object-contain"
+                                            className="h-48 md:h-64 w-auto"
+                                            loading={i < 2 ? undefined : "lazy"}
                                         />
                                     </div>
                                     <a
                                         href={still.url}
                                         download={still.name}
-                                        className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 hover:bg-black/90 text-white p-2 rounded-full"
+                                        className="absolute bottom-3 right-3 bg-black/70 hover:bg-black/90 text-white p-2 rounded-full"
                                         onClick={(e) => e.stopPropagation()}
                                     >
                                         <Download size={14} />
@@ -259,32 +361,36 @@ export function PressKitClient() {
                                 <div
                                     key={i}
                                     className="relative group"
-                                    onMouseEnter={() => setHoveredCelebrity(i)}
+                                    onMouseEnter={() => {
+                                        setHoveredCelebrity(i);
+                                        // Preload Kannada image on hover
+                                        preloadCelebrityImage(i, 'knd', celebrity.kndImage);
+                                    }}
                                     onMouseLeave={() => setHoveredCelebrity(null)}
                                 >
                                     <div className="card overflow-hidden relative">
-                                        {/* English Version */}
+                                        {/* English Version - always loaded */}
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img
                                             src={celebrity.engImage}
                                             alt={`${celebrity.name} - English`}
-                                            className="w-full h-auto object-contain"
+                                            className="w-full h-auto"
                                             style={{ 
-                                                opacity: hoveredCelebrity === i ? 0 : 1,
-                                                transition: 'none'
+                                                display: hoveredCelebrity === i ? 'none' : 'block',
                                             }}
                                         />
-                                        {/* Kannada Version */}
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
-                                            src={celebrity.kndImage}
-                                            alt={`${celebrity.name} - Kannada`}
-                                            className="absolute inset-0 w-full h-full object-contain"
-                                            style={{ 
-                                                opacity: hoveredCelebrity === i ? 1 : 0,
-                                                transition: 'none'
-                                            }}
-                                        />
+                                        {/* Kannada Version - only load when needed */}
+                                        {(hoveredCelebrity === i || celebrityImagesLoaded[i]?.knd) && (
+                                            /* eslint-disable-next-line @next/next/no-img-element */
+                                            <img
+                                                src={celebrity.kndImage}
+                                                alt={`${celebrity.name} - Kannada`}
+                                                className="w-full h-auto"
+                                                style={{ 
+                                                    display: hoveredCelebrity === i ? 'block' : 'none',
+                                                }}
+                                            />
+                                        )}
                                         
                                         {/* Language indicator */}
                                         <div className="absolute top-2 right-2 z-10">
@@ -412,25 +518,23 @@ export function PressKitClient() {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                             {pressAssets.pressClippings.filter(c => !c.url.endsWith('.webp')).map((clipping, i) => (
-                                <div key={i} className="card overflow-hidden group">
+                                <div key={i} className="card overflow-hidden group relative">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         src={clipping.url}
                                         alt={clipping.name}
-                                        className="w-full h-auto object-cover"
+                                        className="w-full h-auto"
+                                        loading="lazy"
                                     />
-                                    <div className="p-2 flex justify-between items-center">
-                                        <span className="text-xs font-medium">{clipping.name}</span>
-                                        <a
-                                            href={clipping.url}
-                                            download={clipping.name}
-                                            className="btn btn-secondary text-xs py-1 px-2"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            <Download size={12} />
-                                            Download
-                                        </a>
-                                    </div>
+                                    <a
+                                        href={clipping.url}
+                                        download={clipping.name}
+                                        className="absolute bottom-2 right-2 btn btn-secondary text-xs py-1 px-2 flex items-center gap-1"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <Download size={12} />
+                                        Download
+                                    </a>
                                 </div>
                             ))}
                         </div>
@@ -453,11 +557,13 @@ export function PressKitClient() {
                             {pressAssets.logos.map((logo, i) => (
                                 <div key={i} className="card p-4">
                                     <div className="aspect-video relative bg-white rounded-lg mb-3 flex items-center justify-center p-4">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
+                                        <NextImage
                                             src={logo.url}
                                             alt={logo.name}
-                                            className="max-w-full max-h-full object-contain"
+                                            fill
+                                            sizes="(max-width: 768px) 50vw, 25vw"
+                                            className="object-contain p-4"
+                                            loading="lazy"
                                         />
                                     </div>
                                     <div className="flex items-center justify-between">
@@ -566,50 +672,25 @@ export function PressKitClient() {
                         transition={{ delay: 0.35 }}
                         className="mb-10"
                     >
-                        <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center justify-between mb-2">
                             <h2 className="text-xl font-bold flex items-center gap-2">
                                 <Film size={20} className="text-primary" />
                                 Shorts / Reels
                             </h2>
                         </div>
+                        <p className="text-sm text-foreground-muted mb-4">
+                            Click on any video to see full screen and download 📥
+                        </p>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             {shorts.map((short, i) => (
-                                <div key={short.id} className="card overflow-hidden group">
-                                    <div className="aspect-[9/16] relative bg-black">
-                                        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                                        <video
-                                            ref={(el) => {
-                                                videoRefs.current[short.id] = el;
-                                            }}
-                                            src={short.videoUrl}
-                                            className="w-full h-full object-cover"
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                        />
-                                        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between gap-2 z-10">
-                                            <button
-                                                onClick={() => toggleMute(short.id)}
-                                                className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
-                                            >
-                                                {mutedVideos[short.id] ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                                            </button>
-                                            <a
-                                                href={short.videoUrl}
-                                                download={`valavaara-${short.slug || `short-${i + 1}`}.mp4`}
-                                                className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <Download size={18} />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="p-3">
-                                        <p className="text-sm font-medium truncate">{short.title}</p>
-                                        <p className="text-xs text-foreground-muted">{short.duration}</p>
-                                    </div>
-                                </div>
+                                <VideoCard
+                                    key={short.id}
+                                    videoUrl={short.videoUrl}
+                                    title={short.title}
+                                    duration={short.duration}
+                                    slug={short.slug}
+                                    index={i}
+                                />
                             ))}
                         </div>
                     </motion.section>
@@ -625,45 +706,42 @@ export function PressKitClient() {
                             <Film size={20} className="text-primary" />
                             Creator Reactions
                         </h2>
-                        <div className="card overflow-hidden relative group">
-                            <video
-                                ref={(el) => {
-                                    if (el) {
-                                        videoRefs.current['reaction'] = el;
-                                    }
-                                }}
-                                autoPlay
-                                loop
-                                muted={mutedVideos['reaction'] !== false}
-                                playsInline
-                                className="w-full h-auto"
-                                src="/assets/videos/reaction.mp4"
-                                onLoadedMetadata={(e) => {
-                                    const video = e.currentTarget;
-                                    if (mutedVideos['reaction'] === undefined) {
-                                        setMutedVideos(prev => ({ ...prev, reaction: true }));
-                                    }
-                                }}
-                            >
-                                Your browser does not support the video tag.
-                            </video>
-                            {/* Mute button */}
-                            <button
-                                onClick={() => toggleMute('reaction')}
-                                className="absolute bottom-2 left-2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all"
-                            >
-                                {mutedVideos['reaction'] !== false ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                            </button>
-                            {/* Download button */}
-                            <a
-                                href="/assets/videos/reaction.mp4"
-                                download="valavaara-reaction.mp4"
-                                className="absolute bottom-2 right-2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                <Download size={16} />
-                            </a>
+                        <div 
+                            className="card overflow-hidden relative group cursor-pointer"
+                            onClick={openReactionModal}
+                        >
+                            {/* Thumbnail placeholder */}
+                            <div className="aspect-video bg-gradient-to-br from-primary/30 via-accent-pink/20 to-secondary/30 relative">
+                                {/* Play button overlay */}
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                        <Play size={28} fill="var(--primary)" className="text-primary ml-1" />
+                                    </div>
+                                </div>
+                                {/* Title */}
+                                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                                    <span className="bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm">
+                                        Creator Reactions
+                                    </span>
+                                    {/* Download button */}
+                                    <a
+                                        href="/assets/videos/reaction.mp4"
+                                        download="valavaara-reaction.mp4"
+                                        className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors backdrop-blur-sm"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <Download size={16} />
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+                        <VideoModal
+                            isOpen={reactionModalOpen}
+                            onClose={() => setReactionModalOpen(false)}
+                            videoSrc="/assets/videos/reaction.mp4"
+                            title="Creator Reactions"
+                            downloadFileName="valavaara-reaction.mp4"
+                        />
                     </motion.section>
 
                     {/* Book CTA */}

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowLeft, Film, Clapperboard, Music, Play, Ticket, Download } from "lucide-react";
+import { ArrowLeft, Film, Clapperboard, Ticket, Download } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
 import { btsImages, BOOKING_URL } from "@/data/content";
@@ -71,12 +72,17 @@ export function BTSPageClient() {
                                     transition={{ delay: 0.1 + i * 0.05 }}
                                     className="card overflow-hidden group relative"
                                 >
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
-                                        src={image.image}
-                                        alt={image.title}
-                                        className="w-full h-64 object-cover"
-                                    />
+                                    <div className="relative w-full h-64">
+                                        <Image
+                                            src={image.image}
+                                            alt={image.title}
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 33vw"
+                                            className="object-cover"
+                                            loading={i < 3 ? undefined : "lazy"}
+                                            priority={i < 3}
+                                        />
+                                    </div>
                                     <div className="absolute bottom-2 right-2">
                                         <a
                                             href={image.image}

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { BookOpen, ChevronRight } from "lucide-react";
 
@@ -31,11 +32,12 @@ export function ChapterCard({
                 {/* Thumbnail */}
                 <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
                     {thumbnail ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
+                        <Image
                             src={thumbnail}
                             alt={title}
-                            className="absolute inset-0 w-full h-full object-cover"
+                            fill
+                            sizes="128px"
+                            className="object-cover"
                         />
                     ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-accent-yellow/40 to-primary/30 flex items-center justify-center">
