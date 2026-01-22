@@ -230,7 +230,7 @@ function HomePageContent() {
               Press Kit →
             </Link>
           </div>
-          <PosterGallery maxPosters={3} />
+          <PosterGallery maxPosters={4} />
         </div>
       </section>
 
@@ -256,35 +256,51 @@ function HomePageContent() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <Link href="/watch/shorts">
-                  <div className="card overflow-hidden group cursor-pointer">
-                    <div className="relative aspect-[9/16] bg-gradient-to-br from-primary/30 via-accent-pink/20 to-secondary/30">
-                      {/* Thumbnail placeholder with play button */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <div className="card overflow-hidden group cursor-pointer">
+                  <Link href="/watch/shorts">
+                    <div className="relative aspect-[9/16] bg-black">
+                      {/* Autoplaying video */}
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                      >
+                        <source src={short.videoUrl} type="video/mp4" />
+                      </video>
+                      
+                      {/* Play button overlay on hover */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all">
                           <Play size={20} fill="var(--primary)" className="text-primary ml-1" />
                         </div>
                       </div>
+                      
                       <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded text-white text-xs">
                         {short.duration}
                       </div>
-                      <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <a
-                          href={short.videoUrl}
-                          download={`valavaara-${short.slug}.mp4`}
-                          className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Download size={16} />
-                        </a>
-                      </div>
                     </div>
-                    <div className="p-3">
-                      <h3 className="font-bold text-sm text-foreground">{short.title}</h3>
-                      <p className="text-xs text-foreground-muted mt-1 line-clamp-2">{short.description}</p>
-                    </div>
+                  </Link>
+                  <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const link = document.createElement('a');
+                        link.href = short.videoUrl;
+                        link.download = `valavaara-${short.slug}.mp4`;
+                        link.click();
+                      }}
+                      className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
+                    >
+                      <Download size={16} />
+                    </button>
                   </div>
-                </Link>
+                  <div className="p-3">
+                    <h3 className="font-bold text-sm text-foreground">{short.title}</h3>
+                    <p className="text-xs text-foreground-muted mt-1 line-clamp-2">{short.description}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
