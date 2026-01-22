@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Share2, MessageCircle, Link2, Twitter, Facebook, Check } from "lucide-react";
+import { analytics } from "@/lib/analytics";
 
 interface ShareButtonProps {
     url: string;
@@ -53,6 +54,7 @@ export function ShareButton({
     };
 
     const handleFacebookShare = () => {
+        analytics.share('facebook', title);
         window.open(
             `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullUrl)}`,
             "_blank"
@@ -145,6 +147,7 @@ export function ShareBar({ url, title, whatsappText }: ShareBarProps) {
     const handleCopyLink = async () => {
         try {
             await navigator.clipboard.writeText(fullUrl);
+            analytics.share('copy_link', title);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
@@ -153,6 +156,7 @@ export function ShareBar({ url, title, whatsappText }: ShareBarProps) {
     };
 
     const handleWhatsAppShare = () => {
+        analytics.share('whatsapp', title);
         const text = whatsappText
             ? `${whatsappText}\n\n${fullUrl}`
             : `Check out ${title}!\n\n${fullUrl}`;
@@ -163,6 +167,7 @@ export function ShareBar({ url, title, whatsappText }: ShareBarProps) {
     };
 
     const handleTwitterShare = () => {
+        analytics.share('twitter', title);
         const text = `Check out ${title}! 🐄❤️`;
         window.open(
             `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(fullUrl)}`,

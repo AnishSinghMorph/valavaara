@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download } from "lucide-react";
+import { analytics } from "@/lib/analytics";
 
 interface Poster {
   id: number;
@@ -46,9 +47,11 @@ function PosterCard({ poster, index }: PosterCardProps) {
 
   const handleClick = useCallback(() => {
     if (poster.engSrc !== poster.kndSrc) {
-      setShowKannada((prev) => !prev);
+      const newLang = !showKannada;
+      setShowKannada(newLang);
+      analytics.viewPoster(`poster-${poster.id}`, newLang ? 'kannada' : 'english');
     }
-  }, [poster.engSrc, poster.kndSrc]);
+  }, [poster.engSrc, poster.kndSrc, poster.id, showKannada]);
 
   const currentSrc = showKannada ? poster.kndSrc : poster.engSrc;
   const currentLang = showKannada ? "ಕನ್ನಡ" : "ENG";

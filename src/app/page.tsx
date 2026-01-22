@@ -12,6 +12,7 @@ import { FloatingBookButton } from "@/components/BookingBar";
 import { TrailerModal } from "@/components/TrailerModal";
 import { PosterGallery } from "@/components/PosterGallery";
 import { characters, crew, movieInfo, trustBadges, shorts, trailer, BOOKING_URL } from "@/data/content";
+import { analytics } from "@/lib/analytics";
 
 // Extract YouTube video ID from trailer URL
 const getYouTubeVideoId = (url: string) => {
@@ -28,6 +29,7 @@ function HomePageContent() {
     const trailerParam = searchParams.get("trailer");
     if (trailerParam === "1" || trailerParam === "true") {
       setShowTrailer(true);
+      analytics.autoOpenTrailer();
       // Remove the parameter from URL without page reload
       window.history.replaceState({}, "", window.location.pathname);
     }
@@ -148,7 +150,10 @@ function HomePageContent() {
             transition={{ delay: 0.4 }}
             className="flex flex-wrap justify-center gap-4"
           >
-            <button onClick={() => setShowTrailer(true)} className="btn btn-primary">
+            <button onClick={() => {
+              setShowTrailer(true);
+              analytics.playVideo(getYouTubeVideoId(trailer.videoUrl), 'trailer', 'Valavaara Official Trailer');
+            }} className="btn btn-primary">
               <Play size={20} />
               Watch Trailer
             </button>
@@ -157,6 +162,7 @@ function HomePageContent() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-book"
+              onClick={() => analytics.bookingClick('hero_section')}
             >
               <Ticket size={20} />
               Book Tickets
@@ -286,9 +292,11 @@ function HomePageContent() {
                     <button
                       onClick={(e) => {
                         e.preventDefault();
+                        const filename = `valavaara-${short.slug}.mp4`;
+                        analytics.download('short', short.id, filename);
                         const link = document.createElement('a');
                         link.href = short.videoUrl;
-                        link.download = `valavaara-${short.slug}.mp4`;
+                        link.download = filename;
                         link.click();
                       }}
                       className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
@@ -310,22 +318,7 @@ function HomePageContent() {
       {/* Characters Section */}
       <section className="py-16 px-4 bg-gradient-to-b from-background to-background-alt">
         <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center mb-4"
-          >
-            Meet the <span className="gradient-text">Characters</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center text-foreground-muted mb-10"
-          >
-            Tap on a card to learn more!
-          </motion.p>
+
 
           {/* Horizontal scroll for character cards */}
           <div className="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 justify-start md:justify-center">
@@ -389,14 +382,16 @@ function HomePageContent() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="font-bold text-lg text-yellow-300 mb-1">{member.name}</h3>
+                    <h3 className="font-bold text-lg mb-1" style={{ color: '#ffda27' }}>{member.name}</h3>
                     <p className="text-sm text-white/90">{member.role}</p>
                   </div>
                   <button
                     onClick={() => {
+                      const filename = `valavaara-crew-${member.name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+                      analytics.download('crew', member.name, filename);
                       const link = document.createElement('a');
                       link.href = member.image;
-                      link.download = `valavaara-crew-${member.name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+                      link.download = filename;
                       link.click();
                     }}
                     className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm"
@@ -426,6 +421,7 @@ function HomePageContent() {
             />
             <button
               onClick={() => {
+                analytics.download('promotion', 'promo-1', 'valavaara-promotion.jpeg');
                 const link = document.createElement('a');
                 link.href = '/assets/promotions/promotion.jpeg';
                 link.download = 'valavaara-promotion.jpeg';
