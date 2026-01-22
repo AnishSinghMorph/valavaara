@@ -363,6 +363,8 @@ function HomePageContent() {
             className="text-center text-foreground-muted mb-10"
           >
             The talented team behind Valavaara
+            <br />
+            <span className="text-sm text-primary">Hover over photos to download</span>
           </motion.p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
@@ -387,9 +389,20 @@ function HomePageContent() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="font-bold text-lg text-yellow-400 mb-1">{member.name}</h3>
+                    <h3 className="font-bold text-lg text-yellow-300 mb-1">{member.name}</h3>
                     <p className="text-sm text-white/90">{member.role}</p>
                   </div>
+                  <button
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      link.href = member.image;
+                      link.download = `valavaara-crew-${member.name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+                      link.click();
+                    }}
+                    className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm"
+                  >
+                    <Download size={16} />
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -406,24 +419,23 @@ function HomePageContent() {
             viewport={{ once: true }}
             className="card overflow-hidden group relative"
           >
-            <div className="relative aspect-video">
-              <Image
-                src="/assets/promotions/promotion.jpeg"
-                alt="Valavaara Promotion"
-                fill
-                sizes="(max-width: 768px) 100vw, 1200px"
-                className="object-cover"
-                loading="lazy"
-              />
-            </div>
-            <a
-              href="/assets/promotions/promotion.jpeg"
-              download="valavaara-promotion.jpeg"
+            <img
+              src="/assets/promotions/promotion.jpeg"
+              alt="Valavaara Promotion"
+              className="w-full h-auto"
+            />
+            <button
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/assets/promotions/promotion.jpeg';
+                link.download = 'valavaara-promotion.jpeg';
+                link.click();
+              }}
               className="absolute bottom-4 right-4 btn btn-secondary text-sm py-2 px-4 opacity-0 group-hover:opacity-100 transition-opacity"
             >
               <Download size={16} />
               Download
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>

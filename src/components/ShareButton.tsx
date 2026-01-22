@@ -188,10 +188,11 @@ export function ShareBar({ url, title, whatsappText }: ShareBarProps) {
             </button>
             <button
                 onClick={handleTwitterShare}
-                className="share-btn share-btn-twitter flex-1 min-w-[120px]"
+                className="share-btn flex-1 min-w-[120px]"
+                style={{ background: "#000000", color: "white" }}
             >
                 <Twitter size={18} />
-                Tweet
+                X
             </button>
         </div>
     );

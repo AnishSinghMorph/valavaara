@@ -130,8 +130,8 @@ export function TrailerPageClient() {
 
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             {shorts.map((short) => (
-                                <Link key={short.id} href="/watch/shorts">
-                                    <div className="card overflow-hidden group cursor-pointer">
+                                <div key={short.id} className="card overflow-hidden group cursor-pointer">
+                                    <Link href="/watch/shorts">
                                         <div className="aspect-[9/16] relative">
                                             <video
                                                 src={short.videoUrl}
@@ -147,17 +147,6 @@ export function TrailerPageClient() {
                                                     <Film size={24} className="text-primary ml-1" />
                                                 </div>
                                             </div>
-                                            {/* Download button */}
-                                            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <a
-                                                    href={short.videoUrl}
-                                                    download={`valavaara-${short.slug}.mp4`}
-                                                    className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    <Download size={16} />
-                                                </a>
-                                            </div>
                                             {/* Click to view all */}
                                             <div className="absolute bottom-2 left-2 right-2">
                                                 <div className="bg-black/60 backdrop-blur-sm rounded-full px-3 py-1 text-center">
@@ -165,16 +154,28 @@ export function TrailerPageClient() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="p-3">
-                                            <h3 className="font-bold text-sm text-foreground truncate">
-                                                {short.title}
-                                            </h3>
-                                            <p className="text-xs text-foreground-muted mt-0.5 line-clamp-1">
-                                                {short.description}
-                                            </p>
-                                        </div>
+                                    </Link>
+                                    {/* Download button outside Link */}
+                                    <button
+                                        onClick={() => {
+                                            const link = document.createElement('a');
+                                            link.href = short.videoUrl;
+                                            link.download = `valavaara-${short.slug}.mp4`;
+                                            link.click();
+                                        }}
+                                        className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm opacity-0 group-hover:opacity-100 z-10"
+                                    >
+                                        <Download size={16} />
+                                    </button>
+                                    <div className="p-3">
+                                        <h3 className="font-bold text-sm text-foreground truncate">
+                                            {short.title}
+                                        </h3>
+                                        <p className="text-xs text-foreground-muted mt-0.5 line-clamp-1">
+                                            {short.description}
+                                        </p>
                                     </div>
-                                </Link>
+                                </div>
                             ))}
                         </div>
                     </motion.div>

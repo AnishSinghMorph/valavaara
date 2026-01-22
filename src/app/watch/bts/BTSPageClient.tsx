@@ -83,17 +83,18 @@ export function BTSPageClient() {
                                             priority={i < 3}
                                         />
                                     </div>
-                                    <div className="absolute bottom-2 right-2">
-                                        <a
-                                            href={image.image}
-                                            download={`valavaara-bts-${i + 1}.jpg`}
-                                            className="btn btn-secondary text-xs py-1.5 px-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            <Download size={12} />
-                                            Download
-                                        </a>
-                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            const link = document.createElement('a');
+                                            link.href = image.image;
+                                            link.download = `valavaara-bts-${i + 1}.jpg`;
+                                            link.click();
+                                        }}
+                                        className="absolute bottom-2 right-2 bg-black/60 hover:bg-black/80 text-white py-1.5 px-3 rounded-full flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm text-xs font-medium"
+                                    >
+                                        <Download size={12} />
+                                        Download
+                                    </button>
                                 </motion.div>
                             ))}
                         </div>
