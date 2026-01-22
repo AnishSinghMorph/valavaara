@@ -373,6 +373,11 @@ export const pressAssets = {
         { name: "Press Coverage 4", url: "/assets/press/newspaper4.jpg" },
         { name: "News Article", url: "/assets/press/news.webp" },
     ],
+    promotions: [
+        { name: "Promotion Banner", url: "/assets/promotions/promotion.jpeg" },
+        { name: "Pamphlet", url: "/assets/promotions/pamphlet.jpeg" },
+        { name: "Poster Promotion", url: "/assets/promotions/posterPromotion.jpeg" },
+    ],
     celebrityLaunches: [
         { 
             name: "Dr. Shivarajkumar", 

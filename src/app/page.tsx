@@ -380,6 +380,33 @@ function HomePageContent() {
         </div>
       </section>
 
+      {/* Promotion Banner */}
+      <section className="py-16 px-4 bg-gradient-to-b from-background-alt to-background">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="card overflow-hidden group relative"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/promotions/promotion.jpeg"
+              alt="Valavaara Promotion"
+              className="w-full h-auto object-cover"
+            />
+            <a
+              href="/assets/promotions/promotion.jpeg"
+              download="valavaara-promotion.jpeg"
+              className="absolute bottom-4 right-4 btn btn-secondary text-sm py-2 px-4 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <Download size={16} />
+              Download
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Trust Badges Section */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
