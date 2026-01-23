@@ -3,6 +3,7 @@ import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { BookingBar } from "@/components/BookingBar";
+import { ReleaseMarquee } from "@/components/ReleaseMarquee";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -59,6 +60,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${outfit.variable} ${inter.variable} antialiased`}>
         <Header />
+        <ReleaseMarquee />
         <main className="min-h-screen safe-bottom">
           {children}
         </main>

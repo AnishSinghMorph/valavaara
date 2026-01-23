@@ -9,3 +9,5 @@ export { ShortCard, ShortCardHorizontal } from './ShortCard';
 export { ChapterCard } from './ChapterCard';
 export { TrailerModal } from './TrailerModal';
 export { PosterGallery, posters } from './PosterGallery';
+export { ReleaseMarquee } from './ReleaseMarquee';
+
