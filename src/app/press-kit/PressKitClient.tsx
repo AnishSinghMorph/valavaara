@@ -628,7 +628,7 @@ export function PressKitClient() {
           </a>
 
           <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2015_Mysore_Hunsur%20RoadLightENG.jpg"
+            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60%20x%2030_Mysore%20roadENG.jpg"
             download="valavaara-hoarding-design1-30x15-mysore-eng.jpg"
             className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
           >
@@ -682,7 +682,7 @@ export function PressKitClient() {
           </a>
 
           <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20Road%2C%20NelmangalaLightENG.jpg"
+            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20RoadENG.jpg"
             download="valavaara-hoarding-design1-40x20-tumkur-road-nelmangala-eng.jpg"
             className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
           >
@@ -742,7 +742,7 @@ export function PressKitClient() {
           </a>
 
           <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2015_Mysore_Hunsur%20RoadLightKND.jpg"
+            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60%20x%2030_Mysore%20roadKND.jpg"
             download="valavaara-hoarding-design1-30x15-mysore-knd.jpg"
             className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
           >
@@ -787,7 +787,7 @@ export function PressKitClient() {
           </a>
 
           <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightENG.jpg"
+            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightKND.jpg"
             download="valavaara-hoarding-design1-60x30-mysore-road-innovative-knd.jpg"
             className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
           >
@@ -796,7 +796,7 @@ export function PressKitClient() {
           </a>
 
           <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60_%20x%2030__Mysore%20road_near%20innovativeLightENG.jpg"
+            href="hhttps://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20RoadKND.jpg"
             download="valavaara-hoarding-design1-40x20-tumkur-road-nelmangala-knd.jpg"
             className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
           >
@@ -805,7 +805,7 @@ export function PressKitClient() {
           </a>
 
           <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20Road%2C%20NelmangalaLightENG.jpg"
+            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Tumkur.%20Gubbi%20gateLightKND.jpg"
             download="valavaara-hoarding-design1-30x20-tumkur-gubbi-gate-knd.jpg"
             className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
           >
