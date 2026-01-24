@@ -475,7 +475,7 @@ function HomePageContent() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <span className="text-6xl mb-4 block">🐄❤️</span>
+            <span className="text-6xl mb-4 block"></span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Experience the Magic in Cinemas
             </h2>
