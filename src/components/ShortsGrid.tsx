@@ -1,38 +1,29 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Play, Download, Volume2, VolumeX } from "lucide-react";
 import { VideoModal, setCurrentModal, clearCurrentModal } from "./VideoModal";
 
-interface InstagramReel {
-  id: string;
-  media_url: string;
-  thumbnail_url: string;
-  permalink: string;
-  caption: string;
-}
-
-interface InstagramReelsProps {
-  fallbackVideos?: Array<{
+interface ShortsGridProps {
+  videos: Array<{
     id: string;
     videoUrl: string;
     title: string;
     description: string;
     thumbnail?: string;
   }>;
-  limit?: number;
 }
 
 // Video Card Component - autoplay muted in grid, opens modal with sound on click
-function VideoCard({ 
-  id, 
-  videoUrl, 
-  title, 
-  description 
-}: { 
-  id: string; 
-  videoUrl: string; 
-  title: string; 
+function VideoCard({
+  id,
+  videoUrl,
+  title,
+  description
+}: {
+  id: string;
+  videoUrl: string;
+  title: string;
   description: string;
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,7 +44,7 @@ function VideoCard({
     clearCurrentModal();
     // Resume the inline video when modal closes
     if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     }
   }, []);
 
@@ -79,7 +70,7 @@ function VideoCard({
             playsInline
             autoPlay
           />
-          
+
           {/* Play button overlay on hover */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors opacity-0 group-hover:opacity-100">
             <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
@@ -123,77 +114,16 @@ function VideoCard({
   );
 }
 
-export function InstagramReels({ fallbackVideos = [], limit = 10 }: InstagramReelsProps) {
-  const [reels, setReels] = useState<InstagramReel[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    async function fetchReels() {
-      try {
-        const response = await fetch(`/api/instagram/reels?limit=${limit}`);
-        const data = await response.json();
-
-        if (data.success && data.reels.length > 0) {
-          setReels(data.reels);
-          setError(false);
-        } else {
-          setError(true);
-        }
-      } catch (err) {
-        console.error('Failed to fetch Instagram reels:', err);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchReels();
-  }, [limit]);
-
-  // Show fallback videos if Instagram fetch fails or not configured
-  if (error || (!loading && reels.length === 0)) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {fallbackVideos.map((video) => (
-          <VideoCard
-            key={video.id}
-            id={video.id}
-            videoUrl={video.videoUrl}
-            title={video.title}
-            description={video.description}
-          />
-        ))}
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="card overflow-hidden animate-pulse">
-            <div className="aspect-[9/16] bg-gray-200" />
-            <div className="p-3">
-              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
-              <div className="h-3 bg-gray-200 rounded w-full" />
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  // Show Instagram reels
+export function ShortsGrid({ videos }: ShortsGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {reels.map((reel) => (
+      {videos.map((video) => (
         <VideoCard
-          key={reel.id}
-          id={reel.id}
-          videoUrl={reel.media_url}
-          title={reel.caption?.split('\n')[0] || 'Valavaara Reel'}
-          description={reel.caption?.split('\n')[1] || 'From our Instagram'}
+          key={video.id}
+          id={video.id}
+          videoUrl={video.videoUrl}
+          title={video.title}
+          description={video.description}
         />
       ))}
     </div>

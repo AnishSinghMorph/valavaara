@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Film, Clapperboard, Music } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
-import { InstagramReels } from "@/components/InstagramReels";
+import { ShortsGrid } from "@/components/ShortsGrid";
 import { shorts } from "@/data/content";
 
 const tabs = [
@@ -56,8 +56,8 @@ export function ShortsHubClient() {
             </p>
           </motion.div>
 
-          {/* Instagram Reels (with fallback to local videos) */}
-          <InstagramReels fallbackVideos={shorts} limit={20} />
+          {/* Shorts Videos */}
+          <ShortsGrid videos={shorts} />
         </div>
       </div>
 
