@@ -131,6 +131,9 @@ export function PressKitClient() {
     const [hoveredCelebrity, setHoveredCelebrity] = useState<number | null>(null);
     const [celebrityImagesLoaded, setCelebrityImagesLoaded] = useState<Record<number, { eng: boolean; knd: boolean }>>({});
     const [reactionModalOpen, setReactionModalOpen] = useState(false);
+    const [screeningModalOpen, setScreeningModalOpen] = useState(false);
+    const screeningVideoRef = useRef<HTMLVideoElement>(null);
+    const [screeningMuted, setScreeningMuted] = useState(true);
 
     const copyToClipboard = async (text: string, id: string) => {
         try {
@@ -154,6 +157,30 @@ export function PressKitClient() {
             }));
         };
     }, [celebrityImagesLoaded]);
+
+    const openScreeningModal = useCallback(() => {
+        setCurrentModal(() => setScreeningModalOpen(false));
+        setScreeningModalOpen(true);
+
+        // Pause inline preview
+        screeningVideoRef.current?.pause();
+    }, []);
+
+    const closeScreeningModal = useCallback(() => {
+        setScreeningModalOpen(false);
+
+        // Resume inline preview
+        screeningVideoRef.current?.play().catch(() => {});
+    }, []);
+
+    const toggleScreeningMute = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setScreeningMuted(prev => !prev);
+
+        if (screeningVideoRef.current) {
+            screeningVideoRef.current.muted = !screeningVideoRef.current.muted;
+        }
+    };
 
     const openReactionModal = useCallback(() => {
         setCurrentModal(() => setReactionModalOpen(false));
@@ -575,6 +602,143 @@ export function PressKitClient() {
                             ))}
                         </div>
                     </motion.section>
+
+                     {/* Reactions Section */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.36 }}
+                        className="mb-10"
+                    >
+                        <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+                            <Film size={20} className="text-primary" />
+                            Screening Feedback
+                        </h2>
+                       
+                       <div
+                        className="aspect-video relative bg-black group cursor-pointer"
+                            onClick={openScreeningModal}
+                            >
+                            <video
+                                ref={screeningVideoRef}
+                                src="/assets/videos/screening_feedback/FeedbackVVLRscreening_5.mp4"
+                                className="w-full h-full object-cover"
+                                muted={screeningMuted}
+                                loop
+                                playsInline
+                                autoPlay
+                            />
+
+                            {/* Play overlay */}
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors opacity-0 group-hover:opacity-100">
+                                <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                                <Play size={28} fill="var(--primary)" className="text-primary ml-1" />
+                                </div>
+                            </div>
+
+                            {/* Mute toggle */}
+                            <button
+                                onClick={toggleScreeningMute}
+                                className="absolute bottom-3 right-12 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full z-10"
+                            >
+                                {screeningMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                            </button>
+
+                            {/* Title + Download */}
+                            <div className="absolute bottom-3 right-3 left-3 flex items-center justify-between">
+                                <span className="bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm">
+                                Screening Feedback
+                                </span>
+
+                                <a
+                                href="/assets/videos/screening_feedback/FeedbackVVLRscreening_5.mp4"
+                                download="valavaara-screening-feedback.mp4"
+                                className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors backdrop-blur-sm"
+                                onClick={(e) => e.stopPropagation()}
+                                >
+                                <Download size={16} />
+                                </a>
+                            </div>
+                        </div>
+
+                        <VideoModal
+                            isOpen={screeningModalOpen}
+                            onClose={closeScreeningModal}
+                            videoSrc="/assets/videos/screening_feedback/FeedbackVVLRscreening_5.mp4"
+                            title="Screening Feedback"
+                            downloadFileName="valavaara-screening-feedback.mp4"
+                        />
+                    </motion.section>
+
+                    {/* Auto Branding Section */}
+                <motion.section
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.38 }}
+                    className="mb-10"
+                    >
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-xl font-bold flex items-center gap-2">
+                        <FileText size={20} className="text-primary" />
+                        Auto Branding
+                        </h2>
+                        <span className="text-sm text-foreground-muted">
+                        Branding (PDF)
+                        </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4">
+                        <div className="card overflow-hidden">
+                        {/* Preview */}
+                        <div className="relative bg-white">
+                            <NextImage
+                                src="/assets/auto/auto.png"
+                                alt="Auto Branding"
+                                width={600}
+                                height={800}
+                                className="w-full h-auto"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                            />
+
+                            {/* PDF badge */}
+                            <div className="absolute top-2 right-2">
+                            <span className="px-2 py-1 rounded-full text-xs font-bold bg-red-600 text-white">
+                                PDF
+                            </span>
+                            </div>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="p-4">
+                            <h3 className="font-bold text-sm mb-3">
+                            Auto Branding
+                            </h3>
+
+                            <div className="flex flex-col md:flex-row gap-2">
+                           <a
+                                href="https://pub-6ddb08018ed54412a4e9fa756ac5137e.r2.dev/Auto_branding.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full md:w-1/2"
+                                >
+                                <span>View PDF</span>
+                                <FileText size={14} />
+                            </a>
+
+                            <a
+                                href="https://pub-6ddb08018ed54412a4e9fa756ac5137e.r2.dev/Auto_branding.pdf?download=1"
+                                download="valavaara-auto-branding.pdf"
+                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full md:w-1/2"
+                                >
+                                <span>Download PDF</span>
+                                <Download size={14} />
+                            </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </motion.section>
+
                     {/* Hoarding Section */}
                  <motion.section
   initial={{ opacity: 0, y: 20 }}
