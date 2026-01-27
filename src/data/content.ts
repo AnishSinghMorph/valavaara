@@ -139,7 +139,7 @@ export const shorts = [
         description: "Loved by kids! Approved by teachers! A film the whole family will enjoy! 🎞️",
         videoUrl: "/assets/videos/shorts/reviewshorts4.mp4",
         thumbnail: "/assets/videos/shorts/reviewshorts4.mp4",
-        duration: "0:48",
+        duration: "0:45",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
     {
@@ -159,7 +159,7 @@ export const shorts = [
         description: "Energy 10/10, Rating 5/5, Love 100%. Audience feedback from experience, not expectation. Valavaara is loved by all 💯❤️",
         videoUrl: "/assets/videos/shorts/reviewshorts1.mp4",
         thumbnail: "/assets/videos/shorts/reviewshorts1.mp4",
-        duration: "0:48",
+        duration: "01:15",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
     {
@@ -169,7 +169,7 @@ export const shorts = [
         description: "Whether you're 8 or 38 or 68 - this movie is for you.✨🎞️",
         videoUrl: "/assets/videos/shorts/reviewshorts2.mp4",
         thumbnail: "/assets/videos/shorts/reviewshorts2.mp4",
-        duration: "0:48",
+        duration: "0:45",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
     {
@@ -179,7 +179,7 @@ export const shorts = [
         description: "Certified by the toughest critics - Kids 👨‍👩‍👧‍👧 🎥",
         videoUrl: "/assets/videos/shorts/reviewshorts5.mp4",
         thumbnail: "/assets/videos/shorts/reviewshorts5.mp4",
-        duration: "0:48",
+        duration: "0:27",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
     {
@@ -189,7 +189,7 @@ export const shorts = [
         description: "❤️ Housefull premiere in Shivamogga! 🐄🎬",
         videoUrl: "/assets/videos/shorts/Kundesi_in_shivamogga.mp4",
         thumbnail: "/assets/videos/shorts/Kundesi_in_shivamogga.mp4",
-        duration: "0:48",
+        duration: "0:24",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
     {
@@ -199,7 +199,7 @@ export const shorts = [
         description: "Shivamogga audience reviews Valavaara! 🐄❤️.",
         videoUrl: "/assets/videos/shorts/Shivamogga_review_1.mp4",
         thumbnail: "/assets/videos/shorts/Shivamogga_review_1.mp4",
-        duration: "0:48",
+        duration: "0:45",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
     {
@@ -209,7 +209,7 @@ export const shorts = [
         description: "Valavaara finding its way to hearts, Shivamogga housefull premiere! ✨🎞️",
         videoUrl: "/assets/videos/shorts/Shivamogga_review_2.mp4",
         thumbnail: "/assets/videos/shorts/Shivamogga_review_2.mp4",
-        duration: "0:48",
+        duration: "01:28",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
 ];
