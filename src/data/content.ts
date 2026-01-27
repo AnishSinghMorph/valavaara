@@ -1,6 +1,6 @@
 // Dummy data for development - will be replaced with actual assets
 
-export const BOOKING_URL = "https://in.bookmyshow.com/movies/bengaluru/valavaara/ET00463120";
+export const BOOKING_URL = "https://in.bookmyshow.com/movies/valavaara/ET00463120";
 
 export const movieInfo = {
     title: "Valavaara",
