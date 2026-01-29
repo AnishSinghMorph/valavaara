@@ -312,6 +312,26 @@ export const shorts = [
         duration: "0:26",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
+    {
+        id: "mysuru-review-1",
+        slug: "mysuru-review-1",
+        title: "Valavaara Reviews",
+        description: "Valavaara | Mysuru Audience Review ✨🎞️",
+        videoUrl: "/assets/videos/shorts/Mysusru_Review1.mp4",
+        thumbnail: "/assets/videos/shorts/Mysusru_Review1.mp4",
+        duration: "0:26",
+        whatsappText: "Don't miss these Valavaara shorts! 🎞️",
+    },
+    {
+        id: "mysuru-review-2",
+        slug: "mysuru-review-2",
+        title: "Valavaara Reviews",
+        description: "Heart is full after the Mysuru premiere! ❤️",
+        videoUrl: "/assets/videos/shorts/Mysusru_Review2.mp4",
+        thumbnail: "/assets/videos/shorts/Mysusru_Review2.mp4",
+        duration: "0:26",
+        whatsappText: "Don't miss these Valavaara shorts! 🎞️",
+    },
 ];
 
 export const characters = [
