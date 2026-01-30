@@ -332,6 +332,26 @@ export const shorts = [
         duration: "0:26",
         whatsappText: "Don't miss these Valavaara shorts! 🎞️",
     },
+    {
+        id: "blr-review-1",
+        slug: "blr-review-1",
+        title: "Valavaara Reviews",
+        description: "Heart is full after the Bangalore premiere! ❤️",
+        videoUrl: "/assets/videos/shorts/blr-review-1.mp4",
+        thumbnail: "/assets/videos/shorts/blr-review-1.mp4",
+        duration: "0:26",
+        whatsappText: "Don't miss these Valavaara shorts! 🎞️",
+    },
+    {
+        id: "blr-review-2",
+        slug: "blr-review-2",
+        title: "Valavaara Reviews",
+        description: "Valavaara | Bangalore Audience Review ✨🎞️",
+        videoUrl: "/assets/videos/shorts/KittappaAndLokeshBlr-2.mp4",
+        thumbnail: "/assets/videos/shorts/KittappaAndLokeshBlr-2.mp4",
+        duration: "0:26",
+        whatsappText: "Don't miss these Valavaara shorts! 🎞️",
+    },
 ];
 
 export const characters = [
