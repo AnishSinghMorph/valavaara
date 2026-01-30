@@ -25,7 +25,7 @@ import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
 import { PosterGallery } from "@/components/PosterGallery";
 import { VideoModal, setCurrentModal } from "@/components/VideoModal";
-import { pressAssets, captions, shorts, BOOKING_URL } from "@/data/content";
+import { pressAssets, captions, shorts, reviewVideos, BOOKING_URL } from "@/data/content";
 
 type CaptionLang = "en" | "kn" | "ta";
 
@@ -170,7 +170,7 @@ export function PressKitClient() {
         setScreeningModalOpen(false);
 
         // Resume inline preview
-        screeningVideoRef.current?.play().catch(() => {});
+        screeningVideoRef.current?.play().catch(() => { });
     }, []);
 
     const toggleScreeningMute = (e: React.MouseEvent) => {
@@ -423,8 +423,8 @@ export function PressKitClient() {
                                         {/* Language indicator */}
                                         <div className="absolute top-2 right-2 z-10">
                                             <span className={`px-2 py-1 rounded-full text-xs font-bold ${hoveredCelebrity === i
-                                                    ? "bg-orange-500 text-white"
-                                                    : "bg-white/90 text-gray-800"
+                                                ? "bg-orange-500 text-white"
+                                                : "bg-white/90 text-gray-800"
                                                 }`}>
                                                 {hoveredCelebrity === i ? "ಕನ್ನಡ" : "ENG"}
                                             </span>
@@ -603,7 +603,7 @@ export function PressKitClient() {
                         </div>
                     </motion.section>
 
-                     {/* Reactions Section */}
+                    {/* Reactions Section */}
                     <motion.section
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -614,11 +614,11 @@ export function PressKitClient() {
                             <Film size={20} className="text-primary" />
                             Screening Feedback
                         </h2>
-                       
-                       <div
-                        className="aspect-video relative bg-black group cursor-pointer"
+
+                        <div
+                            className="aspect-video relative bg-black group cursor-pointer"
                             onClick={openScreeningModal}
-                            >
+                        >
                             <video
                                 ref={screeningVideoRef}
                                 src="/assets/videos/screening_feedback/FeedbackVVLRscreening_5.mp4"
@@ -632,7 +632,7 @@ export function PressKitClient() {
                             {/* Play overlay */}
                             <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors opacity-0 group-hover:opacity-100">
                                 <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
-                                <Play size={28} fill="var(--primary)" className="text-primary ml-1" />
+                                    <Play size={28} fill="var(--primary)" className="text-primary ml-1" />
                                 </div>
                             </div>
 
@@ -647,16 +647,16 @@ export function PressKitClient() {
                             {/* Title + Download */}
                             <div className="absolute bottom-3 right-3 left-3 flex items-center justify-between">
                                 <span className="bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm">
-                                Screening Feedback
+                                    Screening Feedback
                                 </span>
 
                                 <a
-                                href="/assets/videos/screening_feedback/FeedbackVVLRscreening_5.mp4"
-                                download="valavaara-screening-feedback.mp4"
-                                className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors backdrop-blur-sm"
-                                onClick={(e) => e.stopPropagation()}
+                                    href="/assets/videos/screening_feedback/FeedbackVVLRscreening_5.mp4"
+                                    download="valavaara-screening-feedback.mp4"
+                                    className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors backdrop-blur-sm"
+                                    onClick={(e) => e.stopPropagation()}
                                 >
-                                <Download size={16} />
+                                    <Download size={16} />
                                 </a>
                             </div>
                         </div>
@@ -671,570 +671,570 @@ export function PressKitClient() {
                     </motion.section>
 
                     {/* Auto Branding Section */}
-                <motion.section
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.38 }}
-                    className="mb-10"
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.38 }}
+                        className="mb-10"
                     >
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-xl font-bold flex items-center gap-2">
-                        <FileText size={20} className="text-primary" />
-                        Auto Branding
-                        </h2>
-                        <span className="text-sm text-foreground-muted">
-                        Branding (PDF)
-                        </span>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-4">
-                        <div className="card overflow-hidden">
-                        {/* Preview */}
-                        <div className="relative bg-white">
-                            <NextImage
-                                src="/assets/auto/auto.png"
-                                alt="Auto Branding"
-                                width={600}
-                                height={800}
-                                className="w-full h-auto"
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                            />
-
-                            {/* PDF badge */}
-                            <div className="absolute top-2 right-2">
-                            <span className="px-2 py-1 rounded-full text-xs font-bold bg-red-600 text-white">
-                                PDF
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-xl font-bold flex items-center gap-2">
+                                <FileText size={20} className="text-primary" />
+                                Auto Branding
+                            </h2>
+                            <span className="text-sm text-foreground-muted">
+                                Branding (PDF)
                             </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
+                            <div className="card overflow-hidden">
+                                {/* Preview */}
+                                <div className="relative bg-white">
+                                    <NextImage
+                                        src="/assets/auto/auto.png"
+                                        alt="Auto Branding"
+                                        width={600}
+                                        height={800}
+                                        className="w-full h-auto"
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                    />
+
+                                    {/* PDF badge */}
+                                    <div className="absolute top-2 right-2">
+                                        <span className="px-2 py-1 rounded-full text-xs font-bold bg-red-600 text-white">
+                                            PDF
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Actions */}
+                                <div className="p-4">
+                                    <h3 className="font-bold text-sm mb-3">
+                                        Auto Branding
+                                    </h3>
+
+                                    <div className="flex flex-col md:flex-row gap-2">
+                                        <a
+                                            href="https://pub-6ddb08018ed54412a4e9fa756ac5137e.r2.dev/Auto_branding.pdf"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full md:w-1/2"
+                                        >
+                                            <span>View PDF</span>
+                                            <FileText size={14} />
+                                        </a>
+
+                                        <a
+                                            href="https://pub-6ddb08018ed54412a4e9fa756ac5137e.r2.dev/Auto_branding.pdf?download=1"
+                                            download="valavaara-auto-branding.pdf"
+                                            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full md:w-1/2"
+                                        >
+                                            <span>Download PDF</span>
+                                            <Download size={14} />
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        {/* Actions */}
-                        <div className="p-4">
-                            <h3 className="font-bold text-sm mb-3">
-                            Auto Branding
-                            </h3>
-
-                            <div className="flex flex-col md:flex-row gap-2">
-                           <a
-                                href="https://pub-6ddb08018ed54412a4e9fa756ac5137e.r2.dev/Auto_branding.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full md:w-1/2"
-                                >
-                                <span>View PDF</span>
-                                <FileText size={14} />
-                            </a>
-
-                            <a
-                                href="https://pub-6ddb08018ed54412a4e9fa756ac5137e.r2.dev/Auto_branding.pdf?download=1"
-                                download="valavaara-auto-branding.pdf"
-                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full md:w-1/2"
-                                >
-                                <span>Download PDF</span>
-                                <Download size={14} />
-                            </a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </motion.section>
+                    </motion.section>
 
                     {/* Hoarding Section */}
-                 <motion.section
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.235 }}
-  className="mb-10"
->
-  <div className="flex items-center justify-between mb-4">
-    <h2 className="text-xl font-bold flex items-center gap-2">
-      <Signpost size={20} className="text-primary" />
-      Hoarding
-    </h2>
-    <span className="text-sm text-foreground-muted">Available in multiple sizes</span>
-  </div>
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.235 }}
+                        className="mb-10"
+                    >
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-xl font-bold flex items-center gap-2">
+                                <Signpost size={20} className="text-primary" />
+                                Hoarding
+                            </h2>
+                            <span className="text-sm text-foreground-muted">Available in multiple sizes</span>
+                        </div>
 
-  {/* ===================== DESIGN 1 ===================== */}
-<div className="mb-6">
-  <h3 className="text-sm font-bold mb-3 text-foreground-muted uppercase tracking-wide">
-    Design 1
-  </h3>
+                        {/* ===================== DESIGN 1 ===================== */}
+                        <div className="mb-6">
+                            <h3 className="text-sm font-bold mb-3 text-foreground-muted uppercase tracking-wide">
+                                Design 1
+                            </h3>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {/* English Version - Design 1 */}
-    <div className="card overflow-hidden">
-      <div className="relative aspect-[2/1]">
-        <NextImage
-          src="/assets/posters/eng/poster7.jpg"
-          alt="Hoarding - English (Design 1)"
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
-        />
-        <div className="absolute top-2 right-2">
-          <span className="px-2 py-1 rounded-full text-xs font-bold bg-white/90 text-gray-800">
-            ENG
-          </span>
-        </div>
-      </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* English Version - Design 1 */}
+                                <div className="card overflow-hidden">
+                                    <div className="relative aspect-[2/1]">
+                                        <NextImage
+                                            src="/assets/posters/eng/poster7.jpg"
+                                            alt="Hoarding - English (Design 1)"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute top-2 right-2">
+                                            <span className="px-2 py-1 rounded-full text-xs font-bold bg-white/90 text-gray-800">
+                                                ENG
+                                            </span>
+                                        </div>
+                                    </div>
 
-      <div className="p-4">
-        <h3 className="font-bold text-sm mb-3">English Version</h3>
+                                    <div className="p-4">
+                                        <h3 className="font-bold text-sm mb-3">English Version</h3>
 
-        <div className="space-y-2">
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2015_Hassan_Opp%20BusStandLightENG.jpg"
-            download="valavaara-hoarding-design1-30x15-hassan-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Hassan Opp BusStand</span>
-            <Download size={14} />
-          </a>
+                                        <div className="space-y-2">
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2015_Hassan_Opp%20BusStandLightENG.jpg"
+                                                download="valavaara-hoarding-design1-30x15-hassan-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Hassan Opp BusStand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60%20x%2030_Mysore%20roadENG.jpg"
-            download="valavaara-hoarding-design1-30x15-mysore-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Mysore Hunsur Road</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60%20x%2030_Mysore%20roadENG.jpg"
+                                                download="valavaara-hoarding-design1-30x15-mysore-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Mysore Hunsur Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Maddur.%20IB%20circleLightENG.jpg"
-            download="valavaara-hoarding-design1-30x20-maddur-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Maddur IB Circle</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Maddur.%20IB%20circleLightENG.jpg"
+                                                download="valavaara-hoarding-design1-30x20-maddur-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Maddur IB Circle</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_chitradurga.%20Near%20bus%20standLightENG.jpg"
-            download="valavaara-hoarding-design1-30x20-chitradurga-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Chitradurga Near Bus Stand</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_chitradurga.%20Near%20bus%20standLightENG.jpg"
+                                                download="valavaara-hoarding-design1-30x20-chitradurga-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Chitradurga Near Bus Stand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_mandya.%20Highway%20roadLightENG.jpg"
-            download="valavaara-hoarding-design1-30x20-mandya-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Mandya Highway Road</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_mandya.%20Highway%20roadLightENG.jpg"
+                                                download="valavaara-hoarding-design1-30x20-mandya-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Mandya Highway Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightENG.jpg"
-            download="valavaara-hoarding-design1-30x30-davangere-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 30' - Davangare IB Road</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightENG.jpg"
+                                                download="valavaara-hoarding-design1-30x30-davangere-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 30' - Davangare IB Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60_%20x%2030__Mysore%20road_near%20innovativeLightENG.jpg"
-            download="valavaara-hoarding-design1-60x30-mysore-road-innovative-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>60' x 30' - Mysore Road Near Innovative</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60_%20x%2030__Mysore%20road_near%20innovativeLightENG.jpg"
+                                                download="valavaara-hoarding-design1-60x30-mysore-road-innovative-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>60' x 30' - Mysore Road Near Innovative</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20RoadENG.jpg"
-            download="valavaara-hoarding-design1-40x20-tumkur-road-nelmangala-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>40' x 20' - Tumkur road. Nelmangala toll</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20RoadENG.jpg"
+                                                download="valavaara-hoarding-design1-40x20-tumkur-road-nelmangala-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>40' x 20' - Tumkur road. Nelmangala toll</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Tumkur.%20Gubbi%20gateLightENG.jpg"
-            download="valavaara-hoarding-design1-30x20-tumkur-gubbi-gate-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Tumkur. Gubbi gate</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Tumkur.%20Gubbi%20gateLightENG.jpg"
+                                                download="valavaara-hoarding-design1-30x20-tumkur-gubbi-gate-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Tumkur. Gubbi gate</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Hubli_Near%20Chennamma%20CircleLightENG.jpg"
-            download="valavaara-hoarding-design1-30x20-hubli-chennamma-circle-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Hubli. Near chennamma circle</span>
-            <Download size={14} />
-          </a>
-        </div>
-      </div>
-    </div>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Hubli_Near%20Chennamma%20CircleLightENG.jpg"
+                                                download="valavaara-hoarding-design1-30x20-hubli-chennamma-circle-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Hubli. Near chennamma circle</span>
+                                                <Download size={14} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
 
-    {/* Kannada Version - Design 1 */}
-    <div className="card overflow-hidden">
-      <div className="relative aspect-[2/1]">
-        <NextImage
-          src="/assets/posters/knd/poster7.jpg"
-          alt="Hoarding - Kannada (Design 1)"
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
-        />
-        <div className="absolute top-2 right-2">
-          <span className="px-2 py-1 rounded-full text-xs font-bold bg-orange-500 text-white">
-            ಕನ್ನಡ
-          </span>
-        </div>
-      </div>
+                                {/* Kannada Version - Design 1 */}
+                                <div className="card overflow-hidden">
+                                    <div className="relative aspect-[2/1]">
+                                        <NextImage
+                                            src="/assets/posters/knd/poster7.jpg"
+                                            alt="Hoarding - Kannada (Design 1)"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute top-2 right-2">
+                                            <span className="px-2 py-1 rounded-full text-xs font-bold bg-orange-500 text-white">
+                                                ಕನ್ನಡ
+                                            </span>
+                                        </div>
+                                    </div>
 
-      <div className="p-4">
-        <h3 className="font-bold text-sm mb-3">ಕನ್ನಡ ಆವೃತ್ತಿ</h3>
+                                    <div className="p-4">
+                                        <h3 className="font-bold text-sm mb-3">ಕನ್ನಡ ಆವೃತ್ತಿ</h3>
 
-        <div className="space-y-2">
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2015_Hassan_Opp%20BusStandLightKND.jpg"
-            download="valavaara-hoarding-design1-30x15-hassan-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Hassan Opp BusStand</span>
-            <Download size={14} />
-          </a>
+                                        <div className="space-y-2">
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2015_Hassan_Opp%20BusStandLightKND.jpg"
+                                                download="valavaara-hoarding-design1-30x15-hassan-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Hassan Opp BusStand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60%20x%2030_Mysore%20roadKND.jpg"
-            download="valavaara-hoarding-design1-30x15-mysore-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Mysore Hunsur Road</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/60%20x%2030_Mysore%20roadKND.jpg"
+                                                download="valavaara-hoarding-design1-30x15-mysore-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Mysore Hunsur Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Maddur.%20IB%20circleLightKND.jpg"
-            download="valavaara-hoarding-design1-30x20-maddur-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Maddur IB Circle</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Maddur.%20IB%20circleLightKND.jpg"
+                                                download="valavaara-hoarding-design1-30x20-maddur-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Maddur IB Circle</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Hubli_Near%20Chennamma%20CircleLightKND.jpg"
-            download="valavaara-hoarding-design1-30x20-chitradurga-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Chitradurga Near Bus Stand</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Hubli_Near%20Chennamma%20CircleLightKND.jpg"
+                                                download="valavaara-hoarding-design1-30x20-chitradurga-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Chitradurga Near Bus Stand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_mandya.%20Highway%20roadLightKND.jpg"
-            download="valavaara-hoarding-design1-30x20-mandya-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Mandya Highway Road</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_mandya.%20Highway%20roadLightKND.jpg"
+                                                download="valavaara-hoarding-design1-30x20-mandya-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Mandya Highway Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightKND.jpg"
-            download="valavaara-hoarding-design1-30x30-davangere-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 30' - Davangare IB Road</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightKND.jpg"
+                                                download="valavaara-hoarding-design1-30x30-davangere-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 30' - Davangare IB Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightKND.jpg"
-            download="valavaara-hoarding-design1-60x30-mysore-road-innovative-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>60' x 30' - Mysore Road Near Innovative</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2030_Davangare_IB%20RoadLightKND.jpg"
+                                                download="valavaara-hoarding-design1-60x30-mysore-road-innovative-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>60' x 30' - Mysore Road Near Innovative</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="hhttps://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20RoadKND.jpg"
-            download="valavaara-hoarding-design1-40x20-tumkur-road-nelmangala-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>40' x 20' - Tumkur road. Nelmangala toll</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="hhttps://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/40_%20x%2020__Tumkur%20RoadKND.jpg"
+                                                download="valavaara-hoarding-design1-40x20-tumkur-road-nelmangala-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>40' x 20' - Tumkur road. Nelmangala toll</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Tumkur.%20Gubbi%20gateLightKND.jpg"
-            download="valavaara-hoarding-design1-30x20-tumkur-gubbi-gate-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Tumkur. Gubbi gate</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Tumkur.%20Gubbi%20gateLightKND.jpg"
+                                                download="valavaara-hoarding-design1-30x20-tumkur-gubbi-gate-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Tumkur. Gubbi gate</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Hubli_Near%20Chennamma%20CircleLightKND.jpg"
-            download="valavaara-hoarding-design1-30x20-hubli-chennamma-circle-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Hubli. Near chennamma circle</span>
-            <Download size={14} />
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/design%201/30%20x%2020_Hubli_Near%20Chennamma%20CircleLightKND.jpg"
+                                                download="valavaara-hoarding-design1-30x20-hubli-chennamma-circle-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Hubli. Near chennamma circle</span>
+                                                <Download size={14} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
-  {/* ===================== DESIGN 2 ===================== */}
-<div>
-  <h3 className="text-sm font-bold mb-3 text-foreground-muted uppercase tracking-wide">
-    Design 2
-  </h3>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {/* English Version - Design 2 */}
-    <div className="card overflow-hidden">
-      <div className="relative aspect-[2/1]">
-        <NextImage
-          src="/assets/posters/eng/poster1.jpg"
-          alt="Hoarding - English (Design 2)"
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
-        />
-        <div className="absolute top-2 right-2">
-          <span className="px-2 py-1 rounded-full text-xs font-bold bg-white/90 text-gray-800">
-            ENG
-          </span>
-        </div>
-      </div>
 
-      <div className="p-4">
-        <h3 className="font-bold text-sm mb-3">English Version</h3>
+                        {/* ===================== DESIGN 2 ===================== */}
+                        <div>
+                            <h3 className="text-sm font-bold mb-3 text-foreground-muted uppercase tracking-wide">
+                                Design 2
+                            </h3>
 
-        <div className="space-y-2">
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Hassan_Opp%20BusStandDarkENG.jpg"
-            download="valavaara-hoarding-design2-30x15-hassan-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Hassan Opp BusStand</span>
-            <Download size={14} />
-          </a>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* English Version - Design 2 */}
+                                <div className="card overflow-hidden">
+                                    <div className="relative aspect-[2/1]">
+                                        <NextImage
+                                            src="/assets/posters/eng/poster1.jpg"
+                                            alt="Hoarding - English (Design 2)"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute top-2 right-2">
+                                            <span className="px-2 py-1 rounded-full text-xs font-bold bg-white/90 text-gray-800">
+                                                ENG
+                                            </span>
+                                        </div>
+                                    </div>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Mysore.%20Hunsur%20roadDarkENG.jpg"
-            download="valavaara-hoarding-design2-30x15-mysore-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Mysore Hunsur Road</span>
-            <Download size={14} />
-          </a>
+                                    <div className="p-4">
+                                        <h3 className="font-bold text-sm mb-3">English Version</h3>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Maddur.%20IB%20circleDarkENG.jpg"
-            download="valavaara-hoarding-design2-30x20-maddur-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Maddur IB Circle</span>
-            <Download size={14} />
-          </a>
+                                        <div className="space-y-2">
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Hassan_Opp%20BusStandDarkENG.jpg"
+                                                download="valavaara-hoarding-design2-30x15-hassan-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Hassan Opp BusStand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x20__mandya.%20Highway%20roadDarkENG.jpg"
-            download="valavaara-hoarding-design2-30x20-mandya-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Mandya Highway Road</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Mysore.%20Hunsur%20roadDarkENG.jpg"
+                                                download="valavaara-hoarding-design2-30x15-mysore-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Mysore Hunsur Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2030__Davangere.%20IB%20roadDARKENG.jpg"
-            download="valavaara-hoarding-design2-30x30-davangere-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 30' - Davangere. IB Circle</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Maddur.%20IB%20circleDarkENG.jpg"
+                                                download="valavaara-hoarding-design2-30x20-maddur-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Maddur IB Circle</span>
+                                                <Download size={14} />
+                                            </a>
 
-          {/* ✅ NEW LINKS ADDED (ENG) */}
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_chitradurga.%20Near%20bus%20standDarkEng.jpg"
-            download="valavaara-hoarding-design2-30x20-chitradurga-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Chitradurga Near Bus Stand</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x20__mandya.%20Highway%20roadDarkENG.jpg"
+                                                download="valavaara-hoarding-design2-30x20-mandya-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Mandya Highway Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/60_x30__mysore%20road.%20Near%20innovativeDarkeENG.jpg"
-            download="valavaara-hoarding-design2-60x30-mysore-road-innovative-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>60' x 30' - Mysore Road Near Innovative</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2030__Davangere.%20IB%20roadDARKENG.jpg"
+                                                download="valavaara-hoarding-design2-30x30-davangere-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 30' - Davangere. IB Circle</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/40_x20_Tumkur%20road.%20Nelmangala%20tollDarlENG.jpg"
-            download="valavaara-hoarding-design2-40x20-tumkur-road-nelmangala-toll-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>40' x 20' - Tumkur Road Nelmangala Toll</span>
-            <Download size={14} />
-          </a>
+                                            {/* ✅ NEW LINKS ADDED (ENG) */}
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_chitradurga.%20Near%20bus%20standDarkEng.jpg"
+                                                download="valavaara-hoarding-design2-30x20-chitradurga-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Chitradurga Near Bus Stand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Tumkur.%20Gubbi%20gateDarkENG.jpg"
-            download="valavaara-hoarding-design2-30x20-tumkur-gubbi-gate-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Tumkur Gubbi Gate</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/60_x30__mysore%20road.%20Near%20innovativeDarkeENG.jpg"
+                                                download="valavaara-hoarding-design2-60x30-mysore-road-innovative-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>60' x 30' - Mysore Road Near Innovative</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Hubli.%20Near%20chennamma%20circleDarkENG.jpg"
-            download="valavaara-hoarding-design2-30x20-hubli-chennamma-circle-eng.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Hubli Near Chennamma Circle</span>
-            <Download size={14} />
-          </a>
-        </div>
-      </div>
-    </div>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/40_x20_Tumkur%20road.%20Nelmangala%20tollDarlENG.jpg"
+                                                download="valavaara-hoarding-design2-40x20-tumkur-road-nelmangala-toll-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>40' x 20' - Tumkur Road Nelmangala Toll</span>
+                                                <Download size={14} />
+                                            </a>
 
-    {/* Kannada Version - Design 2 */}
-    <div className="card overflow-hidden">
-      <div className="relative aspect-[2/1]">
-        <NextImage
-          src="/assets/posters/knd/poster1.jpg"
-          alt="Hoarding - Kannada (Design 2)"
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
-        />
-        <div className="absolute top-2 right-2">
-          <span className="px-2 py-1 rounded-full text-xs font-bold bg-orange-500 text-white">
-            ಕನ್ನಡ
-          </span>
-        </div>
-      </div>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Tumkur.%20Gubbi%20gateDarkENG.jpg"
+                                                download="valavaara-hoarding-design2-30x20-tumkur-gubbi-gate-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Tumkur Gubbi Gate</span>
+                                                <Download size={14} />
+                                            </a>
 
-      <div className="p-4">
-        <h3 className="font-bold text-sm mb-3">ಕನ್ನಡ ಆವೃತ್ತಿ</h3>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Hubli.%20Near%20chennamma%20circleDarkENG.jpg"
+                                                download="valavaara-hoarding-design2-30x20-hubli-chennamma-circle-eng.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Hubli Near Chennamma Circle</span>
+                                                <Download size={14} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
 
-        <div className="space-y-2">
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Hassan_Opp%20BusStandDarkKND.jpg"
-            download="valavaara-hoarding-design2-30x15-hassan-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Hassan Opp BusStand</span>
-            <Download size={14} />
-          </a>
+                                {/* Kannada Version - Design 2 */}
+                                <div className="card overflow-hidden">
+                                    <div className="relative aspect-[2/1]">
+                                        <NextImage
+                                            src="/assets/posters/knd/poster1.jpg"
+                                            alt="Hoarding - Kannada (Design 2)"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute top-2 right-2">
+                                            <span className="px-2 py-1 rounded-full text-xs font-bold bg-orange-500 text-white">
+                                                ಕನ್ನಡ
+                                            </span>
+                                        </div>
+                                    </div>
 
-          {/* ✅ Fixed hhttps -> https */}
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Mysore.%20Hunsur%20roadDarkKND.jpg"
-            download="valavaara-hoarding-design2-30x15-mysore-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 15' - Mysore Hunsur Road</span>
-            <Download size={14} />
-          </a>
+                                    <div className="p-4">
+                                        <h3 className="font-bold text-sm mb-3">ಕನ್ನಡ ಆವೃತ್ತಿ</h3>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Maddur.%20IB%20circleDarkKND.jpg"
-            download="valavaara-hoarding-design2-30x20-maddur-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Maddur IB Circle</span>
-            <Download size={14} />
-          </a>
+                                        <div className="space-y-2">
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Hassan_Opp%20BusStandDarkKND.jpg"
+                                                download="valavaara-hoarding-design2-30x15-hassan-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Hassan Opp BusStand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x20__mandya.%20Highway%20roadDarkKND.jpg"
-            download="valavaara-hoarding-design2-30x20-mandya-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Mandya Highway Road</span>
-            <Download size={14} />
-          </a>
+                                            {/* ✅ Fixed hhttps -> https */}
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2015__Mysore.%20Hunsur%20roadDarkKND.jpg"
+                                                download="valavaara-hoarding-design2-30x15-mysore-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 15' - Mysore Hunsur Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2030__Davangere.%20IB%20roadDARKKND.jpg"
-            download="valavaara-hoarding-design2-30x30-davangere-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 30' - Davangere. IB Circle</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Maddur.%20IB%20circleDarkKND.jpg"
+                                                download="valavaara-hoarding-design2-30x20-maddur-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Maddur IB Circle</span>
+                                                <Download size={14} />
+                                            </a>
 
-          {/* ✅ NEW LINKS ADDED (KND) */}
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_chitradurga.%20Near%20bus%20standDarkKND.jpg"
-            download="valavaara-hoarding-design2-30x20-chitradurga-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Chitradurga Near Bus Stand</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x20__mandya.%20Highway%20roadDarkKND.jpg"
+                                                download="valavaara-hoarding-design2-30x20-mandya-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Mandya Highway Road</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/60_x30__mysore%20road.%20Near%20innovativeDarkKND.jpg"
-            download="valavaara-hoarding-design2-60x30-mysore-road-innovative-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>60' x 30' - Mysore Road Near Innovative</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_%20x%2030__Davangere.%20IB%20roadDARKKND.jpg"
+                                                download="valavaara-hoarding-design2-30x30-davangere-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 30' - Davangere. IB Circle</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/40_x20_Tumkur%20road.%20Nelmangala%20tollDarlKnd.jpg"
-            download="valavaara-hoarding-design2-40x20-tumkur-road-nelmangala-toll-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>40' x 20' - Tumkur Road Nelmangala Toll</span>
-            <Download size={14} />
-          </a>
+                                            {/* ✅ NEW LINKS ADDED (KND) */}
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_chitradurga.%20Near%20bus%20standDarkKND.jpg"
+                                                download="valavaara-hoarding-design2-30x20-chitradurga-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Chitradurga Near Bus Stand</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Tumkur.%20Gubbi%20gateDarkKND.jpg"
-            download="valavaara-hoarding-design2-30x20-tumkur-gubbi-gate-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Tumkur Gubbi Gate</span>
-            <Download size={14} />
-          </a>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/60_x30__mysore%20road.%20Near%20innovativeDarkKND.jpg"
+                                                download="valavaara-hoarding-design2-60x30-mysore-road-innovative-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>60' x 30' - Mysore Road Near Innovative</span>
+                                                <Download size={14} />
+                                            </a>
 
-          <a
-            href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Hubli.%20Near%20chennamma%20circleDarKND.jpg"
-            download="valavaara-hoarding-design2-30x20-hubli-chennamma-circle-knd.jpg"
-            className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
-          >
-            <span>30' x 20' - Hubli Near Chennamma Circle</span>
-            <Download size={14} />
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/40_x20_Tumkur%20road.%20Nelmangala%20tollDarlKnd.jpg"
+                                                download="valavaara-hoarding-design2-40x20-tumkur-road-nelmangala-toll-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>40' x 20' - Tumkur Road Nelmangala Toll</span>
+                                                <Download size={14} />
+                                            </a>
 
-</motion.section>
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Tumkur.%20Gubbi%20gateDarkKND.jpg"
+                                                download="valavaara-hoarding-design2-30x20-tumkur-gubbi-gate-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Tumkur Gubbi Gate</span>
+                                                <Download size={14} />
+                                            </a>
+
+                                            <a
+                                                href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/30_x20_Hubli.%20Near%20chennamma%20circleDarKND.jpg"
+                                                download="valavaara-hoarding-design2-30x20-hubli-chennamma-circle-knd.jpg"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-between w-full"
+                                            >
+                                                <span>30' x 20' - Hubli Near Chennamma Circle</span>
+                                                <Download size={14} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </motion.section>
 
 
                     {/* L Band Section */}
@@ -1288,8 +1288,8 @@ export function PressKitClient() {
                                         {/* Language indicator */}
                                         <div className="absolute top-2 right-2 z-10">
                                             <span className={`px-2 py-1 rounded-full text-xs font-bold ${hoveredCelebrity === 100 + i
-                                                    ? "bg-orange-500 text-white"
-                                                    : "bg-white/90 text-gray-800"
+                                                ? "bg-orange-500 text-white"
+                                                : "bg-white/90 text-gray-800"
                                                 }`}>
                                                 {hoveredCelebrity === 100 + i ? "ಕನ್ನಡ" : "ENG"}
                                             </span>
@@ -1470,17 +1470,98 @@ export function PressKitClient() {
                         <p className="text-sm text-foreground-muted mb-4">
                             Click on any video to see full screen and download 📥
                         </p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            {shorts.map((short, i) => (
-                                <VideoCard
-                                    key={short.id}
-                                    videoUrl={short.videoUrl}
-                                    title={short.title}
-                                    duration={short.duration}
-                                    slug={short.slug}
-                                    index={i}
-                                />
-                            ))}
+
+                        {/* Promotional Shorts */}
+                        <div className="mb-8">
+                            <h3 className="text-lg font-bold mb-4">Promotional Clips</h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                {shorts.map((short, i) => (
+                                    <VideoCard
+                                        key={short.id}
+                                        videoUrl={short.videoUrl}
+                                        title={short.title}
+                                        duration={short.duration}
+                                        slug={short.slug}
+                                        index={i}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Bengaluru Reviews */}
+                        <div className="mb-8">
+                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                <span className="gradient-text">🏙️ Bengaluru Reviews</span>
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                {reviewVideos.bengaluru.map((video, i) => (
+                                    <VideoCard
+                                        key={video.id}
+                                        videoUrl={video.videoUrl}
+                                        title={video.title}
+                                        duration={video.duration}
+                                        slug={video.slug}
+                                        index={i}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Shivamogga Reviews */}
+                        <div className="mb-8">
+                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                <span className="gradient-text">🎭 Shivamogga Reviews</span>
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                {reviewVideos.shivamogga.map((video, i) => (
+                                    <VideoCard
+                                        key={video.id}
+                                        videoUrl={video.videoUrl}
+                                        title={video.title}
+                                        duration={video.duration}
+                                        slug={video.slug}
+                                        index={i}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Mysuru Reviews */}
+                        <div className="mb-8">
+                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                <span className="gradient-text">🌟 Mysuru Reviews</span>
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                {reviewVideos.mysuru.map((video, i) => (
+                                    <VideoCard
+                                        key={video.id}
+                                        videoUrl={video.videoUrl}
+                                        title={video.title}
+                                        duration={video.duration}
+                                        slug={video.slug}
+                                        index={i}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* General Reviews */}
+                        <div>
+                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                <span className="gradient-text">❤️ General Reviews</span>
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                {reviewVideos.general.map((video, i) => (
+                                    <VideoCard
+                                        key={video.id}
+                                        videoUrl={video.videoUrl}
+                                        title={video.title}
+                                        duration={video.duration}
+                                        slug={video.slug}
+                                        index={i}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </motion.section>
 

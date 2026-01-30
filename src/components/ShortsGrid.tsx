@@ -12,6 +12,20 @@ interface ShortsGridProps {
     description: string;
     thumbnail?: string;
   }>;
+  sectionTitle?: string;
+}
+
+interface ShortsGridWithSectionsProps {
+  sections: Array<{
+    title: string;
+    videos: Array<{
+      id: string;
+      videoUrl: string;
+      title: string;
+      description: string;
+      thumbnail?: string;
+    }>;
+  }>;
 }
 
 // Video Card Component - autoplay muted in grid, opens modal with sound on click
@@ -114,17 +128,48 @@ function VideoCard({
   );
 }
 
-export function ShortsGrid({ videos }: ShortsGridProps) {
+export function ShortsGrid({ videos, sectionTitle }: ShortsGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {videos.map((video) => (
-        <VideoCard
-          key={video.id}
-          id={video.id}
-          videoUrl={video.videoUrl}
-          title={video.title}
-          description={video.description}
-        />
+    <div>
+      {sectionTitle && (
+        <h3 className="text-lg font-bold mb-4 mt-8 first:mt-0">{sectionTitle}</h3>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {videos.map((video) => (
+          <VideoCard
+            key={video.id}
+            id={video.id}
+            videoUrl={video.videoUrl}
+            title={video.title}
+            description={video.description}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Component to display multiple sections with headings
+export function ShortsGridWithSections({ sections }: ShortsGridWithSectionsProps) {
+  return (
+    <div className="space-y-8">
+      {sections.map((section, index) => (
+        <div key={index}>
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <span className="gradient-text">{section.title}</span>
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {section.videos.map((video) => (
+              <VideoCard
+                key={video.id}
+                id={video.id}
+                videoUrl={video.videoUrl}
+                title={video.title}
+                description={video.description}
+              />
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );

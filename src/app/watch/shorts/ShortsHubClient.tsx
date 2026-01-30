@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Film, Clapperboard, Music } from "lucide-react";
+import { ArrowLeft, Film, Clapperboard } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
-import { ShortsGrid } from "@/components/ShortsGrid";
-import { shorts } from "@/data/content";
+import { ShortsGrid, ShortsGridWithSections } from "@/components/ShortsGrid";
+import { shorts, reviewVideos } from "@/data/content";
 
 const tabs = [
   { id: "trailer", label: "Trailer", href: "/watch/trailer", icon: Film },
@@ -56,8 +56,49 @@ export function ShortsHubClient() {
             </p>
           </motion.div>
 
-          {/* Shorts Videos */}
-          <ShortsGrid videos={shorts} />
+          {/* Promotional Shorts */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-12"
+          >
+            <h2 className="text-2xl font-bold mb-6">
+              <span className="gradient-text">Promotional Clips</span>
+            </h2>
+            <ShortsGrid videos={shorts} />
+          </motion.div>
+
+          {/* Review Videos by City */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <h2 className="text-2xl font-bold mb-6">
+              <span className="gradient-text">Audience Reviews</span>
+            </h2>
+            <ShortsGridWithSections
+              sections={[
+                {
+                  title: "🏙️ Bengaluru Reviews",
+                  videos: reviewVideos.bengaluru,
+                },
+                {
+                  title: "🎭 Shivamogga Reviews",
+                  videos: reviewVideos.shivamogga,
+                },
+                {
+                  title: "🌟 Mysuru Reviews",
+                  videos: reviewVideos.mysuru,
+                },
+                {
+                  title: "❤️ General Reviews",
+                  videos: reviewVideos.general,
+                },
+              ]}
+            />
+          </motion.div>
         </div>
       </div>
 
