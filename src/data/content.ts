@@ -655,6 +655,15 @@ export const pressAssets = {
     socialMedia: {
         instagram: "https://www.instagram.com/valavaarathefilm?igsh=YzR6NjdpNTY0d3Zt",
     },
+    promotionalVideos: [
+        {
+            name: "Church Street Flashmob - Bangalore",
+            description: "Flashmob event at Church Street, Bangalore",
+            url: "https://youtu.be/zuiqjL9G3Fw",
+            embedUrl: "https://www.youtube.com/embed/zuiqjL9G3Fw",
+            thumbnail: "https://img.youtube.com/vi/zuiqjL9G3Fw/maxresdefault.jpg",
+        },
+    ],
 };
 
 export const captions = {

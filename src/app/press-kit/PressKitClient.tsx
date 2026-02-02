@@ -530,6 +530,58 @@ export function PressKitClient() {
                         </div>
                     </motion.section>
 
+                    {/* Promotional Videos Section */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.215 }}
+                        className="mb-10"
+                    >
+                        <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+                            <Film size={20} className="text-primary" />
+                            Promotional Videos
+                        </h2>
+                        <div className="grid grid-cols-1 gap-4">
+                            {pressAssets.promotionalVideos?.map((video, i) => (
+                                <div key={i} className="card overflow-hidden">
+                                    {/* Video iframe */}
+                                    <div className="aspect-video relative bg-black">
+                                        <iframe
+                                            src={video.embedUrl}
+                                            title={video.name}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                            className="w-full h-full"
+                                        />
+                                    </div>
+                                    {/* Video info */}
+                                    <div className="p-4">
+                                        <h3 className="font-bold text-sm mb-2">{video.name}</h3>
+                                        <p className="text-xs text-foreground-muted mb-3">{video.description}</p>
+                                        <div className="flex gap-2">
+                                            <a
+                                                href={video.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center gap-1.5"
+                                            >
+                                                <Link2 size={14} />
+                                                Open in YouTube
+                                            </a>
+                                            <button
+                                                onClick={() => copyToClipboard(video.url, `promo-video-${i}`)}
+                                                className="btn btn-secondary text-xs py-2 px-3 flex items-center gap-1.5"
+                                            >
+                                                {copiedCaption === `promo-video-${i}` ? <Check size={14} /> : <Copy size={14} />}
+                                                {copiedCaption === `promo-video-${i}` ? "Copied!" : "Copy Link"}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.section>
+
                     {/* Press Clippings Section */}
                     <motion.section
                         initial={{ opacity: 0, y: 20 }}
