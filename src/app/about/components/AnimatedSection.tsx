@@ -107,7 +107,7 @@ export function AnimatedSection({
                 visible: {
                     ...variants.visible,
                     transition: {
-                        ...(variants.visible as Record<string, unknown>).transition,
+                        ...(variants.visible as any).transition,
                         delay,
                     },
                 },
