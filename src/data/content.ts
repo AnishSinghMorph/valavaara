@@ -619,6 +619,7 @@ export const pressAssets = {
         { name: "Press Coverage 3", url: "/assets/press/newspaper3.jpg" },
         { name: "Press Coverage 4", url: "/assets/press/newspaper4.jpg" },
         { name: "News Article", url: "/assets/press/news.webp" },
+        { name: "Newspaper Review for Instagram", url: "/assets/press-kit/News Paper Review_forInsta.jpg" },
     ],
     promotions: [
         { name: "Promotion Banner", url: "/assets/promotions/promotion.jpeg" },
@@ -663,6 +664,19 @@ export const pressAssets = {
             embedUrl: "https://www.youtube.com/embed/zuiqjL9G3Fw",
             thumbnail: "https://img.youtube.com/vi/zuiqjL9G3Fw/maxresdefault.jpg",
         },
+    ],
+    celebrityReviews: [
+        { name: "Celebrity Review 1", url: "/assets/press-kit/celeb_review1.PNG" },
+        { name: "Celebrity Review 2", url: "/assets/press-kit/celeb_review2.PNG" },
+    ],
+    theaterListPosts: [
+        { name: "Instagram Theatre List", url: "/assets/press-kit/Instagram theatre list post.jpg" },
+        { name: "Theater List Post 2", url: "/assets/press-kit/Theater List Insta-Post02.jpg" },
+        { name: "Shows Filling Fast", url: "/assets/press-kit/Shows are filling fast-01.jpg" },
+    ],
+    ratingsAndAppreciation: [
+        { name: "Appreciated Everywhere - BMS", url: "/assets/press-kit/Appreciated Everywhere_BMS.jpg" },
+        { name: "Overwhelmingly Positive Reviews", url: "/assets/press-kit/Overwhelmingly Positive.png" },
     ],
 };
 

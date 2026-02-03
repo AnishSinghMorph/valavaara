@@ -655,6 +655,120 @@ export function PressKitClient() {
                         </div>
                     </motion.section>
 
+                    {/* Celebrity Reviews Section */}
+                    {pressAssets.celebrityReviews && pressAssets.celebrityReviews.length > 0 && (
+                        <motion.section
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.24 }}
+                            className="mb-10"
+                        >
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-xl font-bold flex items-center gap-2">
+                                    ⭐ Celebrity Reviews
+                                </h2>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {pressAssets.celebrityReviews.map((review, i) => (
+                                    <div key={i} className="card overflow-hidden group relative">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={review.url}
+                                            alt={review.name}
+                                            className="w-full h-auto"
+                                            loading="lazy"
+                                        />
+                                        <a
+                                            href={review.url}
+                                            download={review.name.toLowerCase().replace(/\s+/g, '-')}
+                                            className="absolute bottom-2 right-2 btn btn-secondary text-xs py-1 px-2 flex items-center gap-1"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <Download size={12} />
+                                            Download
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.section>
+                    )}
+
+                    {/* Theater List Posts Section */}
+                    {pressAssets.theaterListPosts && pressAssets.theaterListPosts.length > 0 && (
+                        <motion.section
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.25 }}
+                            className="mb-10"
+                        >
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-xl font-bold flex items-center gap-2">
+                                    🎭 Theater List & Show Updates
+                                </h2>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {pressAssets.theaterListPosts.map((post, i) => (
+                                    <div key={i} className="card overflow-hidden group relative">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={post.url}
+                                            alt={post.name}
+                                            className="w-full h-auto"
+                                            loading="lazy"
+                                        />
+                                        <a
+                                            href={post.url}
+                                            download={post.name.toLowerCase().replace(/\s+/g, '-')}
+                                            className="absolute bottom-2 right-2 btn btn-secondary text-xs py-1 px-2 flex items-center gap-1"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <Download size={12} />
+                                            Download
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.section>
+                    )}
+
+                    {/* Ratings & Appreciation Section */}
+                    {pressAssets.ratingsAndAppreciation && pressAssets.ratingsAndAppreciation.length > 0 && (
+                        <motion.section
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.26 }}
+                            className="mb-10"
+                        >
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-xl font-bold flex items-center gap-2">
+                                    🏆 Ratings & Appreciation
+                                </h2>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {pressAssets.ratingsAndAppreciation.map((item, i) => (
+                                    <div key={i} className="card overflow-hidden group relative">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={item.url}
+                                            alt={item.name}
+                                            className="w-full h-auto"
+                                            loading="lazy"
+                                        />
+                                        <a
+                                            href={item.url}
+                                            download={item.name.toLowerCase().replace(/\s+/g, '-')}
+                                            className="absolute bottom-2 right-2 btn btn-secondary text-xs py-1 px-2 flex items-center gap-1"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <Download size={12} />
+                                            Download
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.section>
+                    )}
+
                     {/* Reactions Section */}
                     <motion.section
                         initial={{ opacity: 0, y: 20 }}
