@@ -4,11 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Play, Download, Ticket } from "lucide-react";
+import { Menu, X, Play, Download, Ticket, Info } from "lucide-react";
 import { BOOKING_URL } from "@/data/content";
 
 const navLinks = [
     { href: "/watch/trailer", label: "Watch", icon: Play },
+    { href: "/about", label: "About", icon: Info },
     { href: "/press-kit", label: "Press Kit", icon: Download },
 ];
 
@@ -20,9 +21,9 @@ export function Header() {
             <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                    <Image 
-                        src="/assets/logos/morph.png" 
-                        alt="Morph Productions" 
+                    <Image
+                        src="/assets/logos/morph.png"
+                        alt="Morph Productions"
                         width={120}
                         height={40}
                         className="h-10 w-auto"

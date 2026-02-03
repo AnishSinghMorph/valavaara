@@ -90,9 +90,9 @@ function HomePageContent() {
             transition={{ delay: 0.1 }}
             className="mb-4"
           >
-            <Image 
-              src="/assets/logos/Eng.png" 
-              alt="Valavaara" 
+            <Image
+              src="/assets/logos/Eng.png"
+              alt="Valavaara"
               width={400}
               height={160}
               className="mx-auto h-24 md:h-32 lg:h-40 w-auto"
@@ -121,8 +121,8 @@ function HomePageContent() {
             <div>
               <div className="aspect-video relative">
                 {/* Trailer Thumbnail Image */}
-                <Image 
-                  src="/assets/images/trailer-thumbnail.jpg" 
+                <Image
+                  src="/assets/images/trailer-thumbnail.jpg"
                   alt="Valavaara Official Trailer"
                   fill
                   sizes="(max-width: 768px) 100vw, 768px"
@@ -275,14 +275,14 @@ function HomePageContent() {
                       >
                         <source src={short.videoUrl} type="video/mp4" />
                       </video>
-                      
+
                       {/* Play button overlay on hover */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all">
                           <Play size={20} fill="var(--primary)" className="text-primary ml-1" />
                         </div>
                       </div>
-                      
+
                       <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded text-white text-xs">
                         {short.duration}
                       </div>
@@ -415,16 +415,16 @@ function HomePageContent() {
             className="card overflow-hidden group relative"
           >
             <img
-              src="/assets/promotions/promotion.jpeg"
-              alt="Valavaara Promotion"
+              src="/assets/press-kit/News Paper Review_forInsta.jpg"
+              alt="Valavaara Newspaper Review"
               className="w-full h-auto"
             />
             <button
               onClick={() => {
-                analytics.download('promotion', 'promo-1', 'valavaara-promotion.jpeg');
+                analytics.download('press', 'news-1', 'valavaara-newspaper-review.jpg');
                 const link = document.createElement('a');
-                link.href = '/assets/promotions/promotion.jpeg';
-                link.download = 'valavaara-promotion.jpeg';
+                link.href = '/assets/press-kit/News Paper Review_forInsta.jpg';
+                link.download = 'valavaara-newspaper-review.jpg';
                 link.click();
               }}
               className="absolute bottom-4 right-4 btn btn-secondary text-sm py-2 px-4 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -497,10 +497,10 @@ function HomePageContent() {
 
       <Footer />
       <FloatingBookButton />
-      
+
       {/* Trailer Modal - Opens automatically when ?trailer=1 is in URL */}
-      <TrailerModal 
-        isOpen={showTrailer} 
+      <TrailerModal
+        isOpen={showTrailer}
         onClose={handleTrailerClose}
         videoId={getYouTubeVideoId(trailer.videoUrl)}
       />
