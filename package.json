@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@next/third-parties": "^16.1.4",
-    "@studio-freight/lenis": "^1.0.42",
     "@tanstack/react-virtual": "^3.13.18",
     "@vercel/analytics": "^1.6.1",
     "framer-motion": "^12.27.2",

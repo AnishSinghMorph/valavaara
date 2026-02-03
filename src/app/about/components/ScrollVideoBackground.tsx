@@ -25,7 +25,12 @@ export function ScrollVideoBackground() {
             handleLoadedMetadata();
         } else {
             video.addEventListener('loadedmetadata', handleLoadedMetadata);
+            // Fallback: force load state after 1s just in case
+            setTimeout(() => setIsLoaded(true), 1000);
         }
+
+        // Ensure video is loaded
+        video.load();
 
         return () => video.removeEventListener('loadedmetadata', handleLoadedMetadata);
     }, []);
