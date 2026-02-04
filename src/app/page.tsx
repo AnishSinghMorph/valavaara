@@ -71,7 +71,7 @@ function HomePageContent() {
           </motion.div>
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-12 text-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 py-12 text-center">
           {/* Certification Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
