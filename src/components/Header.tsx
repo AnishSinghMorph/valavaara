@@ -10,6 +10,7 @@ import { BOOKING_URL } from "@/data/content";
 const navLinks = [
     { href: "/watch/trailer", label: "Watch", icon: Play },
     { href: "/about", label: "About", icon: Info },
+    { href: "/review", label: "Reviews", icon: Play },
     { href: "/press-kit", label: "Press Kit", icon: Download },
 ];
 
