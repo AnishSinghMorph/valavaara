@@ -20,7 +20,7 @@ const posters: Poster[] = [
   { id: 4, engSrc: "/assets/posters/eng/poster4.jpg", kndSrc: "/assets/posters/knd/poster4.jpg", alt: "Valavaara Poster 4" },
   { id: 6, engSrc: "/assets/posters/eng/poster6.jpg", kndSrc: "/assets/posters/knd/poster6.jpg", alt: "Valavaara Poster 6" },
   { id: 7, engSrc: "/assets/posters/eng/poster7.jpg", kndSrc: "/assets/posters/knd/poster7.jpg", alt: "Valavaara Poster 7" },
-  { id: 8, engSrc: "/assets/posters/eng/poster8.jpg", kndSrc: "/assets/posters/knd/poster8.jpg", alt: "Valavaara Poster 8" },
+  // { id: 8, engSrc: "/assets/posters/eng/poster8.jpg", kndSrc: "/assets/posters/knd/poster8.jpg", alt: "Valavaara Poster 8" },
   { id: 9, engSrc: "/assets/promotions/posterPromotion1.jpeg", kndSrc: "/assets/promotions/posterPromotion1.jpeg", alt: "Poster Promotion" },
   { id: 10, engSrc: "/assets/promotions/theatreStandeeENG.jpeg", kndSrc: "/assets/promotions/theatreStandeeKND.jpeg", alt: "Theatre Standee" },
 ];
