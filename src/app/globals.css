@@ -265,6 +265,10 @@ h6 {
   -webkit-backdrop-filter: blur(10px);
 }
 
+.header-bg {
+  background: #ffffff;
+}
+
 .safe-bottom {
   padding-bottom: max(80px, env(safe-area-inset-bottom));
 }
