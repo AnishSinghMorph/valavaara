@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { BookingBar } from "@/components/BookingBar";
-import { ReleaseMarquee } from "@/components/ReleaseMarquee";
+import { ConditionalLayout } from "@/components/ConditionalLayout";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -59,12 +57,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${inter.variable} antialiased`}>
-        <Header />
-        <ReleaseMarquee />
-        <main className="min-h-screen safe-bottom">
-          {children}
-        </main>
-        <BookingBar />
+        <ConditionalLayout>
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </ConditionalLayout>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX'} />
         <Analytics />
       </body>
