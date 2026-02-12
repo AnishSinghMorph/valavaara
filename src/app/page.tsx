@@ -10,7 +10,7 @@ export default function HomePage() {
         src="/assets/images/Mob Preview.png"
         alt="Valavaara Movie Poster"
         fill
-        className="object-cover md:hidden"
+        className="object-contain md:hidden"
         priority
         quality={100}
       />
