@@ -5,12 +5,22 @@ import { ArrowRight } from "lucide-react";
 export default function HomePage() {
   return (
     <div className="fixed inset-0 w-full h-screen overflow-hidden">
-      {/* Full-screen poster background */}
+      {/* Full-screen poster background - Mobile */}
       <Image
-        src="/assets/posters/eng/poster4.jpg"
+        src="/assets/images/Mob Preview.png"
         alt="Valavaara Movie Poster"
         fill
-        className="object-cover"
+        className="object-cover md:hidden"
+        priority
+        quality={100}
+      />
+      
+      {/* Full-screen poster background - Desktop */}
+      <Image
+        src="/assets/images/Web Preview.png"
+        alt="Valavaara Movie Poster"
+        fill
+        className="object-cover hidden md:block"
         priority
         quality={100}
       />

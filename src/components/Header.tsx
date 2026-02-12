@@ -55,14 +55,23 @@ export function Header() {
                     </a>
                 </nav>
 
-                {/* Mobile Menu Button */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden p-2 text-foreground"
-                    aria-label="Toggle menu"
-                >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                {/* Mobile Review Link and Menu Button */}
+                <div className="md:hidden flex items-center gap-3">
+                    <Link
+                        href="/review"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/30 border border-primary/40 text-primary hover:text-primary hover:bg-primary/40 hover:border-primary/60 transition-all text-sm font-medium"
+                    >
+                        <Play size={16} className="opacity-100" />
+                        Reviews
+                    </Link>
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="p-2 text-foreground"
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Nav */}
