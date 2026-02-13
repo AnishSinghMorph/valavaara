@@ -127,7 +127,9 @@ export default function ReviewPageClient() {
             {reviewVideos.bengaluru
               .filter(video => 
                 ['bengaluru-girish', 'bengaluru-nagathihalli', 'bengaluru-pavan', 
-                 'bengaluru-lokesh', 'bengaluru-ananya', 'bengaluru-interview-1', 'bengaluru-interview-2'].includes(video.id)
+                 'bengaluru-lokesh', 'bengaluru-ananya', 'bengaluru-interview-1', 'bengaluru-interview-2', 'celebrities-interview-1', 
+                 'celebrities-interview-2', 'celebrities-interview-3', 'celebrities-interview-4', 'celebrities-interview-5', 'celebrities-interview-6', 
+                 'celebrities-interview-7', 'celebrities-interview-8', 'celebrities-interview-9', 'celebrities-interview-10'].includes(video.id)
               )
               .map((video, index) => (
                 <VideoCard
