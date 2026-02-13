@@ -380,6 +380,16 @@ export const reviewVideos = {
             duration: "0:36",
             whatsappText: "Cinema has no language. Love travels 🌏❤️",
         },
+           {
+            id: "bengaluru-review-9",
+            slug: "bengaluru-review-9",
+            title: "VLLRA Interview",
+            description: "Memorable moments with the stars! 📸✨",
+            videoUrl: "/assets/videos/bangalore-reviews/Vllra_Interview_V2.mp4",
+            thumbnail: "/assets/videos/bangalore-reviews/Vllra_Interview_V2.mp4",
+            duration: "0:45",
+            whatsappText: "Memorable moments with the stars! ✨🎬",
+        },
     ],
     shivamogga: [
         {
