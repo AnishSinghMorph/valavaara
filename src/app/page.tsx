@@ -28,8 +28,8 @@ export default function HomePage() {
       {/* Dark overlay for better button visibility */}
       <div className="absolute inset-0 bg-black/30 z-10" />
       
-      {/* Button positioned at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center p-6 z-50">
+      {/* Button positioned at 40% from top */}
+      <div className="fixed top-[32%] left-0 right-0 flex items-center justify-center px-4 z-50">
         <Link 
           href="/main"
           className="inline-flex items-center gap-2 text-sm px-4 py-2 shadow-2xl hover:scale-110 transition-transform bg-white/10 backdrop-blur-md border-2 border-primary text-white rounded-lg font-semibold"
