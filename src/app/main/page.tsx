@@ -11,7 +11,7 @@ import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
 import { TrailerModal } from "@/components/TrailerModal";
 import { PosterGallery } from "@/components/PosterGallery";
-import { characters, crew, movieInfo, trustBadges, shorts, trailer, BOOKING_URL } from "@/data/content";
+import { characters, crew, movieInfo, trustBadges, shorts, trailer, BOOKING_URL, youtubeReviews } from "@/data/content";
 import { analytics } from "@/lib/analytics";
 
 // Extract YouTube video ID from trailer URL
@@ -307,6 +307,49 @@ function HomePageContent() {
                   <div className="p-3">
                     <h3 className="font-bold text-sm text-foreground">{short.title}</h3>
                     <p className="text-xs text-foreground-muted mt-1 line-clamp-2">{short.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Celebrity Reviews Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Celebrity <span className="gradient-text">Reviews</span>
+            </h2>
+            <Link href="/review" className="text-primary font-medium hover:underline">
+              More Reviews →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {youtubeReviews.shorts.slice(0, 3).map((video, i) => (
+              <motion.div
+                key={video.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="card overflow-hidden">
+                  <div className="aspect-[9/16] relative">
+                    <iframe
+                      src={video.embedUrl}
+                      title={video.title}
+                      className="absolute inset-0 w-full h-full"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="p-3">
+                    <h3 className="font-bold text-xs md:text-sm text-foreground line-clamp-2">{video.title}</h3>
                   </div>
                 </div>
               </motion.div>

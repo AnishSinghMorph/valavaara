@@ -140,7 +140,7 @@ export const shorts = [
 // Review Videos Organized by City
 export const reviewVideos = {
     bengaluru: [
-                {
+        {
             id: "bengaluru-girish",
             slug: "bengaluru-girish",
             title: "Girish Kasaravalli Interview",
@@ -150,7 +150,7 @@ export const reviewVideos = {
             duration: "1:00",
             whatsappText: "Girish Kasaravalli reviews Valavaara! 🎬🌟",
         },
-                {
+        {
             id: "bengaluru-nagathihalli",
             slug: "bengaluru-nagathihalli",
             title: "Nagathihalli Interview",
@@ -160,7 +160,7 @@ export const reviewVideos = {
             duration: "1:00",
             whatsappText: "Nagathihalli reviews Valavaara! 🎬",
         },
-                {
+        {
             id: "bengaluru-pavan",
             slug: "bengaluru-pavan",
             title: "Pavan Wader Interview",
@@ -170,7 +170,7 @@ export const reviewVideos = {
             duration: "1:00",
             whatsappText: "Pavan Wader's thoughts on Valavaara! 🎬",
         },
-                {
+        {
             id: "bengaluru-lokesh",
             slug: "bengaluru-lokesh",
             title: "Lokesh Interview",
@@ -210,7 +210,7 @@ export const reviewVideos = {
             duration: "1:00",
             whatsappText: "Ananya Amar's review of Valavaara! 🎬",
         },
-         {
+        {
             id: "celebrities-interview-1",
             slug: "celebrities-interview-1",
             title: "Celebrities Interview",
@@ -220,7 +220,7 @@ export const reviewVideos = {
             duration: "1:27",
             whatsappText: "Artists and guests share their reactions! 🎬🎭",
         },
-            {
+        {
             id: "celebrities-interview-2",
             slug: "celebrities-interview-2",
             title: "Celebrities Interview",
@@ -250,7 +250,7 @@ export const reviewVideos = {
             duration: "0:48",
             whatsappText: "Special interactions with the cast and guests! 📽️",
         },
-         {
+        {
             id: "celebrities-interview-5",
             slug: "celebrities-interview-5",
             title: "K.M. Chaitanya Interview",
@@ -260,7 +260,7 @@ export const reviewVideos = {
             duration: "0:53",
             whatsappText: "Notable voices celebrate the film’s success! 🎬⭐",
         },
-         {
+        {
             id: "celebrities-interview-6",
             slug: "celebrities-interview-6",
             title: "Meghana Gaonkar Interview",
@@ -270,7 +270,7 @@ export const reviewVideos = {
             duration: "0:58",
             whatsappText: "Candid moments with stars and creators! 🎬",
         },
-            {
+        {
             id: "celebrities-interview-7",
             slug: "celebrities-interview-7",
             title: "Nagendra Prasad Interview",
@@ -280,7 +280,7 @@ export const reviewVideos = {
             duration: "0:50",
             whatsappText: "Film personalities speak about their experience! 💬🎬",
         },
-           {
+        {
             id: "celebrities-interview-8",
             slug: "celebrities-interview-8",
             title: "Praveen Tej Interview",
@@ -380,7 +380,7 @@ export const reviewVideos = {
             duration: "0:36",
             whatsappText: "Cinema has no language. Love travels 🌏❤️",
         },
-           {
+        {
             id: "bengaluru-review-9",
             slug: "bengaluru-review-9",
             title: "VLLRA Interview",
@@ -565,6 +565,39 @@ export const reviewVideos = {
             thumbnail: "/assets/videos/shorts/reviewshorts5.mp4",
             duration: "0:52",
             whatsappText: "Valavaara review highlights! 🎬💫",
+        },
+    ],
+};
+
+// YouTube Celebrity Review Videos
+export const youtubeReviews = {
+    shorts: [
+        {
+            id: "jayamala-short",
+            title: "Dr. Jayamala, President of KFCC talks about Valavaara",
+            embedUrl: "https://www.youtube.com/embed/DA1KgufVtxs",
+        },
+        {
+            id: "ashwath-ninasam-short",
+            title: "Actor Ashwath Ninasam shares his thoughts on Valavaara",
+            embedUrl: "https://www.youtube.com/embed/i40jsvM4sx4",
+        },
+        {
+            id: "parvathy-mangala-short",
+            title: "Author Parvathy A Mangala shares her review",
+            embedUrl: "https://www.youtube.com/embed/fFwq6OE-s9Y",
+        },
+    ],
+    fullVideos: [
+        {
+            id: "jayamala-full",
+            title: "Dr. Jayamala, President KFCC's views on Valavaara",
+            embedUrl: "https://www.youtube.com/embed/vcqI5XS4_uY",
+        },
+        {
+            id: "ashwath-ninasam-full",
+            title: "Kannada Actor Ashwath Ninasam's review of Valavaara",
+            embedUrl: "https://www.youtube.com/embed/2zsqxYWJx0Y",
         },
     ],
 };
