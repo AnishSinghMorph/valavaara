@@ -12,6 +12,7 @@ const tabs = [
     { id: "trailer", label: "Trailer", href: "/watch/trailer", icon: Film },
     { id: "shorts", label: "Shorts", href: "/watch/shorts", icon: Film },
     { id: "bts", label: "BTS", href: "/watch/bts", icon: Clapperboard },
+    { id: "reviews", label: "Reviews", href: "/watch/reviews", icon: Film },
 ];
 
 // Extract YouTube video ID from trailer URL

@@ -311,6 +311,16 @@ export const reviewVideos = {
             whatsappText: "Captured moments with notable personalities! 📸🎬",
         },
         {
+            id: "bengaluru-review-8",
+            slug: "bengaluru-review-8",
+            title: "Bengaluru Review",
+            description: "Cinema has no language. Love travels 🌏❤️",
+            videoUrl: "/assets/videos/bangalore-reviews/VLLRA_Interview_01.mp4",
+            thumbnail: "/assets/videos/bangalore-reviews/VLLRA_Interview_01.mp4",
+            duration: "0:36",
+            whatsappText: "Cinema has no language. Love travels 🌏❤️",
+        },
+        {
             id: "bengaluru-review-2",
             slug: "bengaluru-review-2",
             title: "Bengaluru Audience Review",
@@ -369,16 +379,6 @@ export const reviewVideos = {
             thumbnail: "/assets/videos/shorts/blr-review-7.mp4",
             duration: "0:38",
             whatsappText: "Amazing Bengaluru premiere reviews! 🎬✨",
-        },
-        {
-            id: "bengaluru-review-8",
-            slug: "bengaluru-review-8",
-            title: "Bengaluru Review",
-            description: "Cinema has no language. Love travels 🌏❤️",
-            videoUrl: "/assets/videos/bangalore-reviews/VLLRA_Interview_01.mp4",
-            thumbnail: "/assets/videos/bangalore-reviews/VLLRA_Interview_01.mp4",
-            duration: "0:36",
-            whatsappText: "Cinema has no language. Love travels 🌏❤️",
         },
         {
             id: "bengaluru-review-9",

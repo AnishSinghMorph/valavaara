@@ -368,101 +368,7 @@ export function PressKitClient() {
                         </div>
                     </motion.section>
 
-                    {/* Celebrity Trailer Launches */}
-                    <motion.section
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.16 }}
-                        className="mb-10"
-                    >
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-bold flex items-center gap-2">
-                                <Star size={20} className="text-primary" />
-                                Celebrity Trailer Launches
-                            </h2>
-                            <span className="text-sm text-foreground-muted">
-                                Click to see Kannada version ✨
-                            </span>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {pressAssets.celebrityLaunches?.map((celebrity, i) => (
-                                <div
-                                    key={i}
-                                    className="relative group"
-                                    onMouseEnter={() => {
-                                        setHoveredCelebrity(i);
-                                        // Preload Kannada image on hover
-                                        preloadCelebrityImage(i, 'knd', celebrity.kndImage);
-                                    }}
-                                    onMouseLeave={() => setHoveredCelebrity(null)}
-                                >
-                                    <div className="card overflow-hidden relative">
-                                        {/* English Version - always loaded */}
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
-                                            src={celebrity.engImage}
-                                            alt={`${celebrity.name} - English`}
-                                            className="w-full h-auto"
-                                            style={{
-                                                display: hoveredCelebrity === i ? 'none' : 'block',
-                                            }}
-                                        />
-                                        {/* Kannada Version - only load when needed */}
-                                        {(hoveredCelebrity === i || celebrityImagesLoaded[i]?.knd) && (
-                                            /* eslint-disable-next-line @next/next/no-img-element */
-                                            <img
-                                                src={celebrity.kndImage}
-                                                alt={`${celebrity.name} - Kannada`}
-                                                className="w-full h-auto"
-                                                style={{
-                                                    display: hoveredCelebrity === i ? 'block' : 'none',
-                                                }}
-                                            />
-                                        )}
 
-                                        {/* Language indicator */}
-                                        <div className="absolute top-2 right-2 z-10">
-                                            <span className={`px-2 py-1 rounded-full text-xs font-bold ${hoveredCelebrity === i
-                                                ? "bg-orange-500 text-white"
-                                                : "bg-white/90 text-gray-800"
-                                                }`}>
-                                                {hoveredCelebrity === i ? "ಕನ್ನಡ" : "ENG"}
-                                            </span>
-                                        </div>
-
-                                        {/* Download buttons */}
-                                        <div className="absolute bottom-2 left-2 right-2 z-10"
-                                            style={{
-                                                opacity: hoveredCelebrity === i ? 1 : 0,
-                                                transition: 'none'
-                                            }}
-                                        >
-                                            <div className="flex flex-col sm:flex-row gap-2">
-                                                <a
-                                                    href={celebrity.engImage}
-                                                    download={`${celebrity.name}-eng.jpg`}
-                                                    className="flex-1 btn btn-secondary text-xs sm:text-sm py-2 px-3 flex items-center justify-center gap-1.5"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    <Download size={14} />
-                                                    English
-                                                </a>
-                                                <a
-                                                    href={celebrity.kndImage}
-                                                    download={`${celebrity.name}-knd.jpg`}
-                                                    className="flex-1 btn btn-secondary text-xs sm:text-sm py-2 px-3 flex items-center justify-center gap-1.5"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    <Download size={14} />
-                                                    ಕನ್ನಡ
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.section>
 
                     {/* Trailer Links */}
                     <motion.section
@@ -655,43 +561,7 @@ export function PressKitClient() {
                         </div>
                     </motion.section>
 
-                    {/* Celebrity Reviews Section */}
-                    {pressAssets.celebrityReviews && pressAssets.celebrityReviews.length > 0 && (
-                        <motion.section
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.24 }}
-                            className="mb-10"
-                        >
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-bold flex items-center gap-2">
-                                    ⭐ Celebrity Reviews
-                                </h2>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {pressAssets.celebrityReviews.map((review, i) => (
-                                    <div key={i} className="card overflow-hidden group relative">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
-                                            src={review.url}
-                                            alt={review.name}
-                                            className="w-full h-auto"
-                                            loading="lazy"
-                                        />
-                                        <a
-                                            href={review.url}
-                                            download={review.name.toLowerCase().replace(/\s+/g, '-')}
-                                            className="absolute bottom-2 right-2 btn btn-secondary text-xs py-1 px-2 flex items-center gap-1"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            <Download size={12} />
-                                            Download
-                                        </a>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.section>
-                    )}
+
 
                     {/* Theater List Posts Section */}
                     {pressAssets.theaterListPosts && pressAssets.theaterListPosts.length > 0 && (
@@ -1648,63 +1518,6 @@ export function PressKitClient() {
                                         title={short.title}
                                         duration={short.duration}
                                         slug={short.slug}
-                                        index={i}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Bengaluru Reviews */}
-                        <div className="mb-8">
-                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                                <span className="gradient-text">🏙️ Bengaluru Reviews</span>
-                            </h3>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {reviewVideos.bengaluru.map((video, i) => (
-                                    <VideoCard
-                                        key={video.id}
-                                        videoUrl={video.videoUrl}
-                                        title={video.title}
-                                        duration={video.duration}
-                                        slug={video.slug}
-                                        index={i}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Shivamogga Reviews */}
-                        <div className="mb-8">
-                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                                <span className="gradient-text">🎭 Shivamogga Reviews</span>
-                            </h3>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {reviewVideos.shivamogga.map((video, i) => (
-                                    <VideoCard
-                                        key={video.id}
-                                        videoUrl={video.videoUrl}
-                                        title={video.title}
-                                        duration={video.duration}
-                                        slug={video.slug}
-                                        index={i}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Mysuru Reviews */}
-                        <div className="mb-8">
-                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                                <span className="gradient-text">🌟 Mysuru Reviews</span>
-                            </h3>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {reviewVideos.mysuru.map((video, i) => (
-                                    <VideoCard
-                                        key={video.id}
-                                        videoUrl={video.videoUrl}
-                                        title={video.title}
-                                        duration={video.duration}
-                                        slug={video.slug}
                                         index={i}
                                     />
                                 ))}

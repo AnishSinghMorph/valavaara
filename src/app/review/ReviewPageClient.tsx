@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { instagramReels } from "@/data/reviews";
-import { reviewVideos, youtubeReviews } from "@/data/content";
+import { reviewVideos, youtubeReviews, pressAssets } from "@/data/content";
 import { VideoModal, setCurrentModal } from "@/components/VideoModal";
 import { Play, Volume2, VolumeX } from "lucide-react";
 
@@ -190,6 +190,104 @@ export default function ReviewPageClient() {
                 />
               ))}
           </div>
+        </section>
+
+        {/* Celebrity Trailer Launches */}
+        {pressAssets.celebrityLaunches && pressAssets.celebrityLaunches.length > 0 && (
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8 text-center text-primary">Celebrity Trailer Launches</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {pressAssets.celebrityLaunches.map((celebrity, i) => (
+                <div key={i} className="card overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={celebrity.engImage}
+                    alt={celebrity.name}
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                  <div className="p-3">
+                    <h3 className="font-bold text-sm text-foreground">{celebrity.name}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Celebrity Reviews (Images) */}
+        {pressAssets.celebrityReviews && pressAssets.celebrityReviews.length > 0 && (
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8 text-center text-primary">Celebrity Reviews</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {pressAssets.celebrityReviews.map((review, i) => (
+                <div key={i} className="card overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={review.url}
+                    alt={review.name}
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Audience Reviews by City */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-center text-primary">Audience Reviews</h2>
+
+          {/* Bengaluru */}
+          {reviewVideos.bengaluru.filter(v => !['bengaluru-girish', 'bengaluru-nagathihalli', 'bengaluru-pavan', 'bengaluru-lokesh', 'bengaluru-ananya', 'bengaluru-interview-1', 'bengaluru-interview-2', 'celebrities-interview-1', 'celebrities-interview-2', 'celebrities-interview-3', 'celebrities-interview-4', 'celebrities-interview-5', 'celebrities-interview-6', 'celebrities-interview-7', 'celebrities-interview-8', 'celebrities-interview-9', 'celebrities-interview-10'].includes(v.id)).length > 0 && (
+            <div className="mb-10">
+              <h3 className="text-xl font-bold mb-4"><span className="gradient-text">🏙️ Bengaluru Reviews</span></h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+                {reviewVideos.bengaluru
+                  .filter(v => !['bengaluru-girish', 'bengaluru-nagathihalli', 'bengaluru-pavan', 'bengaluru-lokesh', 'bengaluru-ananya', 'bengaluru-interview-1', 'bengaluru-interview-2', 'celebrities-interview-1', 'celebrities-interview-2', 'celebrities-interview-3', 'celebrities-interview-4', 'celebrities-interview-5', 'celebrities-interview-6', 'celebrities-interview-7', 'celebrities-interview-8', 'celebrities-interview-9', 'celebrities-interview-10'].includes(v.id))
+                  .map((video) => (
+                    <VideoCard key={video.id} videoUrl={video.videoUrl} title={video.title} description={video.description} />
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {/* Shivamogga */}
+          {reviewVideos.shivamogga && reviewVideos.shivamogga.length > 0 && (
+            <div className="mb-10">
+              <h3 className="text-xl font-bold mb-4"><span className="gradient-text">🎭 Shivamogga Reviews</span></h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+                {reviewVideos.shivamogga.map((video) => (
+                  <VideoCard key={video.id} videoUrl={video.videoUrl} title={video.title} description={video.description} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Mysuru */}
+          {reviewVideos.mysuru && reviewVideos.mysuru.length > 0 && (
+            <div className="mb-10">
+              <h3 className="text-xl font-bold mb-4"><span className="gradient-text">🌟 Mysuru Reviews</span></h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+                {reviewVideos.mysuru.map((video) => (
+                  <VideoCard key={video.id} videoUrl={video.videoUrl} title={video.title} description={video.description} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* General */}
+          {reviewVideos.general && reviewVideos.general.length > 0 && (
+            <div className="mb-10">
+              <h3 className="text-xl font-bold mb-4"><span className="gradient-text">❤️ General Reviews</span></h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+                {reviewVideos.general.map((video) => (
+                  <VideoCard key={video.id} videoUrl={video.videoUrl} title={video.title} description={video.description} />
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Instagram Reviews Section */}

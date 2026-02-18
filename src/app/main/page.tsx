@@ -1,177 +1,291 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, Ticket, Download, Film, Clapperboard, ImageIcon } from "lucide-react";
+import { Play, Ticket, Download, Film, Clapperboard, ImageIcon, X } from "lucide-react";
 import { CharacterCard } from "@/components/CharacterCard";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
-import { TrailerModal } from "@/components/TrailerModal";
 import { PosterGallery } from "@/components/PosterGallery";
-import { characters, crew, movieInfo, trustBadges, shorts, trailer, BOOKING_URL, youtubeReviews } from "@/data/content";
+import { VideoModal, setCurrentModal } from "@/components/VideoModal";
+import { characters, crew, trustBadges, shorts, BOOKING_URL, youtubeReviews, reviewVideos, pressAssets } from "@/data/content";
 import { analytics } from "@/lib/analytics";
-
-// Extract YouTube video ID from trailer URL
-const getYouTubeVideoId = (url: string) => {
-  const match = url.match(/[?&]v=([^&]+)/);
-  return match ? match[1] : "";
-};
 
 function HomePageContent() {
   const searchParams = useSearchParams();
-  const [showTrailer, setShowTrailer] = useState(false);
 
-  // Auto-open trailer if URL has ?trailer=1 parameter
+  // Track URL params for analytics
   useEffect(() => {
     const trailerParam = searchParams.get("trailer");
     if (trailerParam === "1" || trailerParam === "true") {
-      setShowTrailer(true);
       analytics.autoOpenTrailer();
-      // Remove the parameter from URL without page reload
       window.history.replaceState({}, "", window.location.pathname);
     }
   }, [searchParams]);
 
-  const handleTrailerClose = () => {
-    setShowTrailer(false);
-  };
+  // IDs of celebrity interview videos
+  const celebrityInterviewIds = [
+    'bengaluru-girish', 'bengaluru-nagathihalli', 'bengaluru-pavan',
+    'bengaluru-lokesh', 'bengaluru-ananya', 'bengaluru-interview-1', 'bengaluru-interview-2',
+    'celebrities-interview-1', 'celebrities-interview-2', 'celebrities-interview-3',
+    'celebrities-interview-4', 'celebrities-interview-5', 'celebrities-interview-6',
+    'celebrities-interview-7', 'celebrities-interview-8', 'celebrities-interview-9', 'celebrities-interview-10'
+  ];
+  const interviewVideos = reviewVideos.bengaluru.filter(v => celebrityInterviewIds.includes(v.id)).slice(0, 4);
+
+  // Modal state for interview videos
+  const [modalVideo, setModalVideo] = useState<{ src: string; title: string } | null>(null);
+  const openModal = useCallback((src: string, title: string) => {
+    setCurrentModal(() => setModalVideo(null));
+    setModalVideo({ src, title });
+  }, []);
+  const closeModal = useCallback(() => setModalVideo(null), []);
+
+  // Lightbox state for images
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; downloadName: string } | null>(null);
+
+  // Interview IDs filter (excluding audience reviews)
+  const interviewExcludeIds = [
+    'bengaluru-girish', 'bengaluru-nagathihalli', 'bengaluru-pavan', 'bengaluru-lokesh',
+    'bengaluru-ananya', 'bengaluru-interview-1', 'bengaluru-interview-2',
+    'celebrities-interview-1', 'celebrities-interview-2', 'celebrities-interview-3',
+    'celebrities-interview-4', 'celebrities-interview-5', 'celebrities-interview-6',
+    'celebrities-interview-7', 'celebrities-interview-8', 'celebrities-interview-9', 'celebrities-interview-10'
+  ];
+  const bengaluruAudienceReviews = reviewVideos.bengaluru.filter(v => !interviewExcludeIds.includes(v.id));
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background-alt via-background to-background" />
-
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-20 left-10 text-6xl md:text-8xl opacity-20"
-          >
-            🐄
-          </motion.div>
-          <motion.div
-            animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-40 right-10 text-5xl md:text-7xl opacity-20"
-          >
-            🌾
-          </motion.div>
-          <motion.div
-            animate={{ y: [0, 15, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute top-40 right-20 text-4xl md:text-6xl opacity-15"
-          >
-            ☀️
-          </motion.div>
-        </div>
-
-        <div className="relative z-10 max-w-6xl mx-auto px-4 py-12 text-center">
-          {/* Certification Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-block mb-6"
-          >
-            <span className="badge-certified text-sm">
-              ✓ U Certified — Family Friendly
-            </span>
-          </motion.div>
-
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-4"
-          >
-            <Image
-              src="/assets/logos/Eng.png"
-              alt="Valavaara"
-              width={400}
-              height={160}
-              className="mx-auto h-24 md:h-32 lg:h-40 w-auto"
-              priority
-            />
-          </motion.h1>
-
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl text-foreground-muted mb-8 max-w-2xl mx-auto"
-          >
-            {movieInfo.tagline}
-          </motion.p>
-
-          {/* Trailer Thumbnail */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="relative max-w-3xl mx-auto mb-10 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer"
-            onClick={() => setShowTrailer(true)}
-          >
-            <div>
-              <div className="aspect-video relative">
-                {/* Trailer Thumbnail Image */}
-                <Image
-                  src="/assets/images/trailer-thumbnail.jpg"
-                  alt="Valavaara Official Trailer"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 768px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-
-              {/* Play button overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center shadow-xl"
-                >
-                  <Play size={36} fill="var(--primary)" className="text-primary ml-1" />
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <button onClick={() => {
-              setShowTrailer(true);
-              analytics.playVideo(getYouTubeVideoId(trailer.videoUrl), 'trailer', 'Valavaara Official Trailer');
-            }} className="btn btn-primary">
-              <Play size={20} />
-              Watch Trailer
-            </button>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-book"
-              onClick={() => analytics.bookingClick('hero_section')}
+      {/* Image Lightbox */}
+      {lightboxImage && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95"
+          onClick={() => setLightboxImage(null)}
+        >
+          <div className="relative max-w-4xl w-full" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
             >
-              <Ticket size={20} />
-              Book Tickets
-            </a>
-          </motion.div>
+              <X size={32} />
+            </button>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={lightboxImage.src} alt={lightboxImage.alt} className="w-full h-auto rounded-lg shadow-2xl" />
+            <div className="mt-3 flex justify-between items-center">
+              <p className="text-white font-semibold">{lightboxImage.alt}</p>
+              <a
+                href={lightboxImage.src}
+                download={lightboxImage.downloadName}
+                className="flex items-center gap-1 bg-primary text-white px-3 py-1.5 rounded-full text-sm font-medium hover:bg-primary/80 transition-colors"
+                onClick={e => e.stopPropagation()}
+              >
+                <Download size={14} /> Download
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Video Modal */}
+      {modalVideo && (
+        <VideoModal
+          isOpen={!!modalVideo}
+          onClose={closeModal}
+          videoSrc={modalVideo.src}
+          title={modalVideo.title}
+          downloadFileName={`valavaara-${modalVideo.title.toLowerCase().replace(/\s+/g, '-')}.mp4`}
+        />
+      )}
+
+      {/* Reviews Section - shown FIRST before hero */}
+      <section className="pt-24 pb-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Celebrity <span className="gradient-text">Reviews</span>
+            </h2>
+            <Link href="/review" className="text-primary font-medium hover:underline">
+              More Reviews →
+            </Link>
+          </div>
+
+          {/* 1. Celebrity Review Shorts (YouTube) */}
+          <h3 className="text-lg font-bold mb-4"><span className="gradient-text">⭐ Celebrity Review Shorts</span></h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+            {youtubeReviews.shorts.slice(0, 3).map((video, i) => (
+              <motion.div
+                key={video.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="card overflow-hidden">
+                  <div className="aspect-[9/16] relative">
+                    <iframe
+                      src={video.embedUrl}
+                      title={video.title}
+                      className="absolute inset-0 w-full h-full"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="p-3">
+                    <h4 className="font-bold text-xs md:text-sm text-foreground line-clamp-2">{video.title}</h4>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* 2. Celebrity Interviews — click to open fullscreen */}
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold"><span className="gradient-text">🎬 Celebrity Interviews</span></h3>
+            <Link href="/review" className="text-primary text-sm font-medium hover:underline">More Reviews →</Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            {interviewVideos.map((video, i) => (
+              <motion.div
+                key={video.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="card overflow-hidden cursor-pointer group"
+                onClick={() => openModal(video.videoUrl, video.title)}
+              >
+                <div className="aspect-[9/16] relative bg-black">
+                  <video
+                    src={video.videoUrl}
+                    className="w-full h-full object-cover"
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                  />
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
+                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100">
+                      <Play size={20} fill="var(--primary)" className="text-primary ml-0.5" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
+                    <p className="text-white text-xs font-medium truncate">{video.title}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* 3. Celebrity Launches & Reviews — combined 2-col grid with download */}
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold"><span className="gradient-text">🌟 Celebrity Launches & 📸 Reviews</span></h3>
+            <Link href="/review" className="text-primary text-sm font-medium hover:underline">More Reviews →</Link>
+          </div>
+          <div className="grid grid-cols-2 gap-4 mb-10">
+            {(pressAssets.celebrityLaunches || [])
+              .filter(c => c.name === "Dr. Shivarajkumar" || c.name === "Daali")
+              .map((celebrity, i) => (
+                <motion.div
+                  key={`cl-${i}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="card overflow-hidden group relative cursor-pointer"
+                  onClick={() => setLightboxImage({ src: celebrity.engImage, alt: celebrity.name, downloadName: `valavaara-${celebrity.name.toLowerCase().replace(/\s+/g, '-')}.jpg` })}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={celebrity.engImage} alt={celebrity.name} className="w-full h-auto group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  <div className="p-2 flex items-center justify-between">
+                    <h4 className="font-bold text-xs text-foreground">{celebrity.name}</h4>
+                    <a
+                      href={celebrity.engImage}
+                      download={`valavaara-${celebrity.name.toLowerCase().replace(/\s+/g, '-')}.jpg`}
+                      className="text-primary hover:text-primary/80 transition-colors"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      <Download size={14} />
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            {(pressAssets.celebrityReviews || []).map((review, i) => (
+              <motion.div
+                key={`cr-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="card overflow-hidden group relative cursor-pointer"
+                onClick={() => setLightboxImage({ src: review.url, alt: review.name, downloadName: `valavaara-celebrity-review-${i + 1}.png` })}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={review.url} alt={review.name} className="w-full h-auto group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                <div className="p-2 flex justify-end">
+                  <a
+                    href={review.url}
+                    download={`valavaara-celebrity-review-${i + 1}.png`}
+                    className="text-primary hover:text-primary/80 transition-colors"
+                    onClick={e => e.stopPropagation()}
+                  >
+                    <Download size={14} />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* 4. Bengaluru Audience Reviews */}
+          {bengaluruAudienceReviews.length > 0 && (
+            <>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold"><span className="gradient-text">🏙️ Bengaluru Audience Reviews</span></h3>
+                <Link href="/review" className="text-primary text-sm font-medium hover:underline">More Reviews →</Link>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {bengaluruAudienceReviews.slice(0, 6).map((video, i) => (
+                  <motion.div
+                    key={video.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="card overflow-hidden cursor-pointer group"
+                    onClick={() => openModal(video.videoUrl, video.title)}
+                  >
+                    <div className="aspect-[9/16] relative bg-black">
+                      <video
+                        src={video.videoUrl}
+                        className="w-full h-full object-cover"
+                        muted
+                        loop
+                        playsInline
+                        autoPlay
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
+                        <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all">
+                          <Play size={16} fill="var(--primary)" className="text-primary ml-0.5" />
+                        </div>
+                      </div>
+                      <div className="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
+                        <p className="text-white text-xs font-medium truncate">{video.title}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
-      {/* Explore Section */}
+
+
+
       <section className="py-16 px-4 bg-background-alt">
         <div className="max-w-6xl mx-auto">
           <motion.h2
@@ -187,6 +301,7 @@ function HomePageContent() {
             {[
               { href: "/watch/shorts", icon: Film, label: "Shorts", emoji: "🎬", color: "from-primary/20 to-accent-pink/20" },
               { href: "/watch/bts", icon: Clapperboard, label: "BTS", emoji: "🎥", color: "from-secondary/20 to-accent-purple/20" },
+              { href: "/watch/reviews", icon: Film, label: "Reviews", emoji: "⭐", color: "from-accent-pink/20 to-secondary/20" },
               { href: "/press-kit", icon: Download, label: "Press Kit", emoji: "📰", color: "from-accent-purple/20 to-primary/20" },
             ].map((item, i) => (
               <motion.div
@@ -315,48 +430,7 @@ function HomePageContent() {
         </div>
       </section>
 
-      {/* Celebrity Reviews Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold">
-              Celebrity <span className="gradient-text">Reviews</span>
-            </h2>
-            <Link href="/review" className="text-primary font-medium hover:underline">
-              More Reviews →
-            </Link>
-          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {youtubeReviews.shorts.slice(0, 3).map((video, i) => (
-              <motion.div
-                key={video.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div className="card overflow-hidden">
-                  <div className="aspect-[9/16] relative">
-                    <iframe
-                      src={video.embedUrl}
-                      title={video.title}
-                      className="absolute inset-0 w-full h-full"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                    />
-                  </div>
-                  <div className="p-3">
-                    <h3 className="font-bold text-xs md:text-sm text-foreground line-clamp-2">{video.title}</h3>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Characters Section */}
       <section className="py-16 px-4 bg-gradient-to-b from-background to-background-alt">
@@ -540,13 +614,6 @@ function HomePageContent() {
 
       <Footer />
       <FloatingBookButton />
-
-      {/* Trailer Modal - Opens automatically when ?trailer=1 is in URL */}
-      <TrailerModal
-        isOpen={showTrailer}
-        onClose={handleTrailerClose}
-        videoId={getYouTubeVideoId(trailer.videoUrl)}
-      />
     </>
   );
 }
