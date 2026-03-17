@@ -5,13 +5,13 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, Ticket, Download, Film, Clapperboard, ImageIcon, X } from "lucide-react";
+import { Play, Download, Film, Clapperboard, ImageIcon, X } from "lucide-react";
 import { CharacterCard } from "@/components/CharacterCard";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
 import { PosterGallery } from "@/components/PosterGallery";
 import { VideoModal, setCurrentModal } from "@/components/VideoModal";
-import { characters, crew, trustBadges, shorts, BOOKING_URL, youtubeReviews, reviewVideos, pressAssets } from "@/data/content";
+import { characters, crew, trustBadges, shorts, youtubeReviews, reviewVideos, pressAssets } from "@/data/content";
 import { analytics } from "@/lib/analytics";
 
 function HomePageContent() {
@@ -103,8 +103,87 @@ function HomePageContent() {
         />
       )}
 
-      {/* Reviews Section - shown FIRST before hero */}
+      {/* Videos Section - Trailers & Songs */}
       <section className="pt-24 pb-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">
+            Watch <span className="gradient-text">Trailers & Songs</span>
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {/* Trailer 2 */}
+            <div className="card overflow-hidden">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/LAVMwUT3cZc"
+                  title="Valavaara | Trailer 2 | In Cinemas Now | Trending Kannada Family Entertainer"
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <div className="p-3">
+                <h4 className="font-bold text-xs md:text-sm text-foreground line-clamp-2">Trailer 2</h4>
+              </div>
+            </div>
+            {/* Trailer 1 */}
+            <div className="card overflow-hidden">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/q95vVeOrjfQ"
+                  title="Valavaara | Official Trailer | Kannada | Releasing Jan 30th 2026"
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <div className="p-3">
+                <h4 className="font-bold text-xs md:text-sm text-foreground line-clamp-2">Official Trailer</h4>
+              </div>
+            </div>
+            {/* Song 1 - Valavaara Anthem */}
+            <div className="card overflow-hidden">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/vPISchnA_S8"
+                  title="Valavaara Anthem | Lyrical Video | Valavaara | Sutan Gowda"
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <div className="p-3">
+                <h4 className="font-bold text-xs md:text-sm text-foreground line-clamp-2">Valavaara Anthem</h4>
+              </div>
+            </div>
+            {/* Song 2 - Gowra */}
+            <div className="card overflow-hidden">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/xEaxAY-IWUY"
+                  title="Gowra - Lyrical Video | Valavaara - 30 Jan, 2026 Release | Kadri Manikanth | Pramod Maravanthe"
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <div className="p-3">
+                <h4 className="font-bold text-xs md:text-sm text-foreground line-clamp-2">Gowra - Lyrical Video</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="py-8 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl md:text-3xl font-bold">
@@ -599,15 +678,6 @@ function HomePageContent() {
             <p className="text-white/80 mb-8 max-w-xl mx-auto">
               Now showing in theaters near you!
             </p>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn bg-white text-primary hover:bg-white/90 shadow-xl"
-            >
-              <Ticket size={20} />
-              Book Tickets on BookMyShow
-            </a>
           </motion.div>
         </div>
       </section>

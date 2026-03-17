@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, ChevronLeft, ChevronRight, Volume2, VolumeX, Share2, Ticket } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Volume2, VolumeX, Share2 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
 import { ShareBar } from "@/components/ShareButton";
-import { storyChapters, BOOKING_URL } from "@/data/content";
+import { storyChapters } from "@/data/content";
 
 interface ChapterData {
     id: string;
@@ -137,7 +137,7 @@ export function ChapterPageClient({ chapter }: ChapterPageClientProps) {
                         ) : (
                             <div className="flex-1" />
                         )}
-                        {nextChapter ? (
+                        {nextChapter && (
                             <Link
                                 href={`/story/${nextChapter.id}`}
                                 className="btn btn-primary flex-1"
@@ -145,41 +145,8 @@ export function ChapterPageClient({ chapter }: ChapterPageClientProps) {
                                 Next
                                 <ChevronRight size={18} />
                             </Link>
-                        ) : (
-                            <a
-                                href={BOOKING_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn btn-book flex-1"
-                            >
-                                <Ticket size={18} />
-                                Book Tickets
-                            </a>
                         )}
                     </div>
-
-                    {/* Book CTA */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="mt-10 p-6 card bg-gradient-to-r from-primary/10 to-accent-pink/10 text-center"
-                    >
-                        <span className="text-4xl mb-2 block">🐄❤️</span>
-                        <h3 className="font-bold text-lg mb-2">Want to see the full story?</h3>
-                        <p className="text-foreground-muted mb-4">
-                            Watch Valavaara in cinemas now!
-                        </p>
-                        <a
-                            href={BOOKING_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-book"
-                        >
-                            <Ticket size={18} />
-                            Book Tickets
-                        </a>
-                    </motion.div>
                 </div>
             </div>
 

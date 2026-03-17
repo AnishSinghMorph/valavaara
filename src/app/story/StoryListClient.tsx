@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, BookOpen, ChevronRight, Ticket } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronRight } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
-import { storyChapters, BOOKING_URL } from "@/data/content";
+import { storyChapters } from "@/data/content";
 
 export function StoryListClient() {
     return (
@@ -88,27 +88,6 @@ export function StoryListClient() {
                         </motion.div>
                     </div>
 
-                    {/* Book CTA */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        className="card p-6 bg-gradient-to-r from-primary/10 to-accent-pink/10 text-center"
-                    >
-                        <h3 className="font-bold text-lg mb-2">Love the story?</h3>
-                        <p className="text-foreground-muted mb-4">
-                            Watch the complete adventure on the big screen!
-                        </p>
-                        <a
-                            href={BOOKING_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-book"
-                        >
-                            <Ticket size={18} />
-                            Book Tickets Now
-                        </a>
-                    </motion.div>
                 </div>
             </div>
 

@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowLeft, Film, Clapperboard, Ticket, Download } from "lucide-react";
+import { ArrowLeft, Film, Clapperboard, Download } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
-import { btsImages, BOOKING_URL } from "@/data/content";
+import { btsImages } from "@/data/content";
 
 const tabs = [
     { id: "trailer", label: "Trailer", href: "/watch/trailer", icon: Film },
@@ -101,27 +101,6 @@ export function BTSPageClient() {
                         </div>
                     </motion.div>
 
-                    {/* Book CTA */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="card p-6 bg-gradient-to-r from-primary/10 to-accent-pink/10 text-center"
-                    >
-                        <h3 className="font-bold text-lg mb-2">Ready to watch the movie?</h3>
-                        <p className="text-foreground-muted mb-4">
-                            Book your tickets and experience the magic on the big screen!
-                        </p>
-                        <a
-                            href={BOOKING_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-book"
-                        >
-                            <Ticket size={18} />
-                            Book on BookMyShow
-                        </a>
-                    </motion.div>
                 </div>
             </div>
 

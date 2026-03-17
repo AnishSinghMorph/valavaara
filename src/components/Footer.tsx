@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { BOOKING_URL } from "@/data/content";
 
 export function Footer() {
     return (
@@ -48,22 +47,6 @@ export function Footer() {
                                 </Link>
                             </li>
                         </ul>
-                    </div>
-
-                    {/* Book Now */}
-                    <div>
-                        <h4 className="font-bold mb-4">Book Tickets</h4>
-                        <a
-                            href={BOOKING_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-book w-full md:w-auto"
-                        >
-                            BookMyShow
-                        </a>
-                        <p className="text-foreground-light text-sm mt-3">
-                            Now showing in cinemas near you!
-                        </p>
                     </div>
                 </div>
 

@@ -405,10 +405,6 @@ export default function AboutPage() {
             <CTASection
                 title="Experience Valavaara"
                 subtitle="A heartwarming journey that the whole family will cherish"
-                primaryButton={{
-                    label: "Book Tickets",
-                    href: "https://in.bookmyshow.com/movies/valavaara/ET00463120",
-                }}
                 secondaryButton={{
                     label: "Download Press Kit",
                     href: "/press-kit",

@@ -13,7 +13,6 @@ import {
     Copy,
     Check,
     Link2,
-    Ticket,
     Instagram,
     Star,
     Play,
@@ -25,7 +24,7 @@ import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
 import { PosterGallery } from "@/components/PosterGallery";
 import { VideoModal, setCurrentModal } from "@/components/VideoModal";
-import { pressAssets, captions, shorts, reviewVideos, BOOKING_URL } from "@/data/content";
+import { pressAssets, captions, shorts, reviewVideos } from "@/data/content";
 
 type CaptionLang = "en" | "kn" | "ta";
 
@@ -1593,40 +1592,6 @@ export function PressKitClient() {
                         />
                     </motion.section>
 
-                    {/* Book CTA */}
-                    <motion.section
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                    >
-                        <div className="card p-6 bg-gradient-to-r from-primary/10 to-accent-pink/10 text-center">
-                            <h3 className="font-bold text-lg mb-2">Booking Link for Your Posts</h3>
-                            <p className="text-foreground-muted text-sm mb-4">
-                                Include this link in your content to help fans book tickets:
-                            </p>
-                            <div className="bg-white rounded-lg p-3 flex items-center gap-2 mb-4">
-                                <span className="text-sm text-foreground-muted truncate flex-1">
-                                    {BOOKING_URL}
-                                </span>
-                                <button
-                                    onClick={() => copyToClipboard(BOOKING_URL, "bookingurl")}
-                                    className="btn btn-secondary text-xs py-1.5 px-3 flex-shrink-0"
-                                >
-                                    {copiedCaption === "bookingurl" ? <Check size={14} /> : <Copy size={14} />}
-                                    {copiedCaption === "bookingurl" ? "Copied!" : "Copy"}
-                                </button>
-                            </div>
-                            <a
-                                href={BOOKING_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn btn-book"
-                            >
-                                <Ticket size={18} />
-                                Open BookMyShow
-                            </a>
-                        </div>
-                    </motion.section>
                 </div>
             </div>
 

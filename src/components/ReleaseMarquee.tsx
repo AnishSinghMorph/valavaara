@@ -9,7 +9,7 @@ export function ReleaseMarquee() {
         "🎥 VALAVAARA IN CINEMAS - 30TH JANUARY",
         "❤️ A STORY THAT WILL MELT YOUR HEART",
         "🐄 VALAVAARA - RELEASING 30TH JAN",
-        "🎞️ BOOK YOUR TICKETS NOW",
+        "🎞️ NOW SHOWING IN CINEMAS",
     ];
 
     return (

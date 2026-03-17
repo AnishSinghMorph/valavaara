@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Ticket, Play } from "lucide-react";
+import { ArrowLeft, Play } from "lucide-react";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { ShareBar } from "@/components/ShareButton";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
-import { shorts, BOOKING_URL } from "@/data/content";
+import { shorts } from "@/data/content";
 
 interface ShortData {
     id: string;
@@ -73,17 +73,6 @@ export function ShortPageClient({ short }: ShortPageClientProps) {
                                 whatsappText={short.whatsappText}
                             />
                         </div>
-
-                        {/* Book Tickets CTA */}
-                        <a
-                            href={BOOKING_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-book w-full"
-                        >
-                            <Ticket size={20} />
-                            Book Tickets on BookMyShow
-                        </a>
                     </motion.div>
 
                     {/* More Shorts */}

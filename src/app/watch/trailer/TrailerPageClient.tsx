@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Ticket, Film, Clapperboard, Music, Download } from "lucide-react";
+import { ArrowLeft, Film, Clapperboard, Music, Download } from "lucide-react";
 import { ShareBar } from "@/components/ShareButton";
 import { Footer } from "@/components/Footer";
 import { FloatingBookButton } from "@/components/BookingBar";
-import { trailer, movieInfo, shorts, BOOKING_URL } from "@/data/content";
+import { trailer, movieInfo, shorts } from "@/data/content";
 
 const tabs = [
     { id: "trailer", label: "Trailer", href: "/watch/trailer", icon: Film },
@@ -93,25 +93,6 @@ export function TrailerPageClient() {
                                 title="Valavaara - Official Trailer"
                                 whatsappText="Watch the official trailer of Valavaara! 🐄❤️ A heartwarming family movie you don't want to miss!"
                             />
-                        </div>
-
-                        {/* Book Tickets CTA */}
-                        <div className="card p-6 bg-gradient-to-r from-primary/10 to-accent-pink/10">
-                            <div className="flex flex-col md:flex-row items-center gap-4">
-                                <div className="flex-1 text-center md:text-left">
-                                    <h3 className="font-bold text-lg">Loved the trailer?</h3>
-                                    <p className="text-foreground-muted">Book your tickets now!</p>
-                                </div>
-                                <a
-                                    href={BOOKING_URL}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn btn-book"
-                                >
-                                    <Ticket size={20} />
-                                    Book on BookMyShow
-                                </a>
-                            </div>
                         </div>
                     </motion.div>
 

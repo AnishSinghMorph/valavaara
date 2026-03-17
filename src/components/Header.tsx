@@ -4,8 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Play, Download, Ticket, Info } from "lucide-react";
-import { BOOKING_URL } from "@/data/content";
+import { Menu, X, Play, Download, Info } from "lucide-react";
 
 const navLinks = [
     { href: "/watch/trailer", label: "Watch", icon: Play },
@@ -44,15 +43,6 @@ export function Header() {
                             {link.label}
                         </Link>
                     ))}
-                    <a
-                        href={BOOKING_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-book text-sm py-2 px-4"
-                    >
-                        <Ticket size={16} />
-                        Book Tickets
-                    </a>
                 </nav>
 
                 {/* Mobile Review Link and Menu Button */}
@@ -95,16 +85,6 @@ export function Header() {
                                     <span className="font-medium">{link.label}</span>
                                 </Link>
                             ))}
-                            <a
-                                href={BOOKING_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={() => setIsOpen(false)}
-                                className="btn btn-book mt-2"
-                            >
-                                <Ticket size={18} />
-                                Book Tickets on BookMyShow
-                            </a>
                         </nav>
                     </motion.div>
                 )}
