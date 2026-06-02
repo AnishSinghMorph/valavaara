@@ -265,15 +265,16 @@ export function PressKitClient() {
                             </span>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4">
-                            <div className="card overflow-hidden">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {/* Card 1: VLLR 1660 x 664-Zee5.psd */}
+                            <div className="card overflow-hidden flex flex-col h-full">
                                 {/* Preview */}
-                                <div className="relative bg-white aspect-[1660/664] max-h-96 flex items-center justify-center overflow-hidden">
+                                <div className="relative bg-white aspect-[1660/664] w-full flex items-center justify-center overflow-hidden border-b border-foreground-light/10">
                                     <NextImage
                                         src="/assets/ZEE5/VLLR 1660 x 664-Zee5.jpg"
                                         alt="Zee5 Banner PSD Preview"
                                         fill
-                                        sizes="(max-width: 768px) 100vw, 800px"
+                                        sizes="(max-width: 768px) 100vw, 400px"
                                         className="object-cover"
                                     />
 
@@ -286,26 +287,129 @@ export function PressKitClient() {
                                 </div>
 
                                 {/* Actions */}
-                                <div className="p-4">
-                                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                                        <div>
-                                            <h3 className="font-bold text-sm mb-1">
-                                                Valavaara Zee5 Banner Source File
+                                <div className="p-4 flex-1 flex flex-col justify-between">
+                                    <div className="mb-4">
+                                        <div className="flex items-center justify-between gap-2 mb-1">
+                                            <h3 className="font-bold text-sm">
+                                                Valavaara Zee5 Banner
                                             </h3>
-                                            <p className="text-xs text-foreground-muted">
-                                                Download the layered Photoshop PSD file (1660 x 664) for high-quality custom edits.
-                                            </p>
+                                            <span className="text-[10px] bg-background-alt px-1.5 py-0.5 rounded font-mono text-foreground-muted">
+                                                1660 x 664
+                                            </span>
                                         </div>
-
-                                        <a
-                                            href="/assets/ZEE5/VLLR 1660 x 664-Zee5.psd"
-                                            download="VLLR 1660 x 664-Zee5.psd"
-                                            className="btn btn-primary text-xs py-2 px-4 flex items-center gap-2 whitespace-nowrap w-full sm:w-auto justify-center animate-pulse-subtle"
-                                        >
-                                            <Download size={14} />
-                                            <span>Download PSD (45.2 MB)</span>
-                                        </a>
+                                        <p className="text-xs text-foreground-muted">
+                                            Official Zee5 banner landscape layout Photoshop source file.
+                                        </p>
                                     </div>
+
+                                    <a
+                                        href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/psd%20files/VLLR%201660%20x%20664-Zee5.psd"
+                                        download="VLLR 1660 x 664-Zee5.psd"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-primary text-xs py-2 px-3 flex items-center gap-2 justify-center w-full"
+                                    >
+                                        <Download size={14} />
+                                        <span>Download PSD</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Card 2: Valavaara Z5(CS&J5).psd */}
+                            <div className="card overflow-hidden flex flex-col h-full">
+                                {/* Preview */}
+                                <div className="relative bg-white aspect-[1660/664] w-full flex items-center justify-center overflow-hidden border-b border-foreground-light/10">
+                                    <NextImage
+                                        src="/assets/ZEE5/Valavaara Z5-JUNE 5 TMB.jpg"
+                                        alt="Valavaara Z5 PSD Preview"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 400px"
+                                        className="object-cover"
+                                    />
+                                    
+                                    {/* PSD badge */}
+                                    <div className="absolute top-2 right-2">
+                                        <span className="px-2 py-1 rounded-full text-xs font-bold bg-blue-600 text-white">
+                                            PSD
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Actions */}
+                                <div className="p-4 flex-1 flex flex-col justify-between">
+                                    <div className="mb-4">
+                                        <div className="flex items-center justify-between gap-2 mb-1">
+                                            <h3 className="font-bold text-sm">
+                                                Valavaara Z5 (CS & J5)
+                                            </h3>
+                                            <span className="text-[10px] bg-background-alt px-1.5 py-0.5 rounded font-mono text-foreground-muted">
+                                                Landscape
+                                            </span>
+                                        </div>
+                                        <p className="text-xs text-foreground-muted">
+                                            Official Zee5 landscape graphics Photoshop source file.
+                                        </p>
+                                    </div>
+
+                                    <a
+                                        href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/psd%20files/Valavaara%20Z5(CS%26J5).psd"
+                                        download="Valavaara Z5(CS&J5).psd"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-primary text-xs py-2 px-3 flex items-center gap-2 justify-center w-full"
+                                    >
+                                        <Download size={14} />
+                                        <span>Download PSD</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Card 3: Valavaara Z5(CS&J5)1080 x 1920.psd */}
+                            <div className="card overflow-hidden flex flex-col h-full">
+                                {/* Preview */}
+                                <div className="relative bg-white aspect-[1660/664] w-full flex items-center justify-center overflow-hidden border-b border-foreground-light/10">
+                                    <NextImage
+                                        src="/assets/ZEE5/Valavaara Z5-JUNE 5 TMB.jpg"
+                                        alt="Valavaara Z5 Story PSD Preview"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 400px"
+                                        className="object-cover"
+                                    />
+
+                                    {/* PSD badge */}
+                                    <div className="absolute top-2 right-2">
+                                        <span className="px-2 py-1 rounded-full text-xs font-bold bg-blue-600 text-white">
+                                            PSD
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Actions */}
+                                <div className="p-4 flex-1 flex flex-col justify-between">
+                                    <div className="mb-4">
+                                        <div className="flex items-center justify-between gap-2 mb-1">
+                                            <h3 className="font-bold text-sm">
+                                                Valavaara Z5 (CS & J5) - Story
+                                            </h3>
+                                            <span className="text-[10px] bg-background-alt px-1.5 py-0.5 rounded font-mono text-foreground-muted">
+                                                1080 x 1920
+                                            </span>
+                                        </div>
+                                        <p className="text-xs text-foreground-muted">
+                                            Official Zee5 mobile story format graphic Photoshop source file.
+                                        </p>
+                                    </div>
+
+                                    <a
+                                        href="https://pub-f6c1bd235a0e483e93a983775c1584c3.r2.dev/psd%20files/Valavaara%20Z5(CS%26J5)1080%20x%201920.psd"
+                                        download="Valavaara Z5(CS&J5)1080 x 1920.psd"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-primary text-xs py-2 px-3 flex items-center gap-2 justify-center w-full"
+                                    >
+                                        <Download size={14} />
+                                        <span>Download PSD</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
