@@ -133,6 +133,9 @@ export function PressKitClient() {
     const [screeningModalOpen, setScreeningModalOpen] = useState(false);
     const screeningVideoRef = useRef<HTMLVideoElement>(null);
     const [screeningMuted, setScreeningMuted] = useState(true);
+    const [ottModalOpen, setOttModalOpen] = useState(false);
+    const ottVideoRef = useRef<HTMLVideoElement>(null);
+    const [ottMuted, setOttMuted] = useState(true);
 
     const copyToClipboard = async (text: string, id: string) => {
         try {
@@ -178,6 +181,30 @@ export function PressKitClient() {
 
         if (screeningVideoRef.current) {
             screeningVideoRef.current.muted = !screeningVideoRef.current.muted;
+        }
+    };
+
+    const openOttModal = useCallback(() => {
+        setCurrentModal(() => setOttModalOpen(false));
+        setOttModalOpen(true);
+
+        // Pause inline preview
+        ottVideoRef.current?.pause();
+    }, []);
+
+    const closeOttModal = useCallback(() => {
+        setOttModalOpen(false);
+
+        // Resume inline preview
+        ottVideoRef.current?.play().catch(() => { });
+    }, []);
+
+    const toggleOttMute = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setOttMuted(prev => !prev);
+
+        if (ottVideoRef.current) {
+            ottVideoRef.current.muted = !ottVideoRef.current.muted;
         }
     };
 
@@ -413,6 +440,73 @@ export function PressKitClient() {
                                 </div>
                             </div>
                         </div>
+                    </motion.section>
+
+                    {/* OTT Promo Video Section */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.115 }}
+                        className="mb-10"
+                    >
+                        <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+                            <Film size={20} className="text-primary" />
+                            Zee5 OTT Promo
+                        </h2>
+
+                        <div
+                            className="aspect-video relative bg-black group cursor-pointer rounded-lg overflow-hidden card"
+                            onClick={openOttModal}
+                        >
+                            <video
+                                ref={ottVideoRef}
+                                src="/assets/ZEE5/Vvlr Ott Video-Final.mp4"
+                                className="w-full h-full object-cover"
+                                muted={ottMuted}
+                                loop
+                                playsInline
+                                autoPlay
+                            />
+
+                            {/* Play overlay */}
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors opacity-0 group-hover:opacity-100">
+                                <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                                    <Play size={28} fill="var(--primary)" className="text-primary ml-1" />
+                                </div>
+                            </div>
+
+                            {/* Mute toggle */}
+                            <button
+                                onClick={toggleOttMute}
+                                className="absolute bottom-3 right-12 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full z-10"
+                            >
+                                {ottMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                            </button>
+
+                            {/* Title + Download */}
+                            <div className="absolute bottom-3 right-3 left-3 flex items-center justify-between">
+                                <span className="bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm">
+                                    Zee5 OTT Promo Video
+                                </span>
+
+                                <a
+                                    href="/assets/ZEE5/Vvlr Ott Video-Final.mp4"
+                                    download="Vvlr Ott Video-Final.mp4"
+                                    className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-colors backdrop-blur-sm"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <Download size={16} />
+                                </a>
+                            </div>
+                        </div>
+
+                        <VideoModal
+                            isOpen={ottModalOpen}
+                            onClose={closeOttModal}
+                            videoSrc="/assets/ZEE5/Vvlr Ott Video-Final.mp4"
+                            title="Zee5 OTT Promo Video"
+                            downloadFileName="valavaara-zee5-ott-promo.mp4"
+                        />
                     </motion.section>
 
                     {/* Promotions Section */}
