@@ -11,9 +11,25 @@ interface Poster {
   engSrc: string;
   kndSrc: string;
   alt: string;
+  gridSpan?: string;
+  aspectRatio?: string;
 }
 
 const posters: Poster[] = [
+  {
+    id: 12,
+    engSrc: "/assets/ZEE5/VLLR 1660 x 664-Zee5.jpg",
+    kndSrc: "/assets/ZEE5/VLLR 1660 x 664-Zee5.jpg",
+    alt: "Valavaara Zee5 Poster",
+    gridSpan: "col-span-2 md:col-span-3",
+    aspectRatio: "aspect-[1660/664]"
+  },
+  {
+    id: 11,
+    engSrc: "/assets/ZEE5/VLLR Zee5 Poster_GIF.gif",
+    kndSrc: "/assets/ZEE5/VLLR Zee5 Poster_GIF.gif",
+    alt: "Valavaara Zee5 Poster GIF"
+  },
   { id: 1, engSrc: "/assets/posters/eng/poster1.jpg", kndSrc: "/assets/posters/knd/poster1.jpg", alt: "Valavaara Poster 1" },
   { id: 2, engSrc: "/assets/posters/eng/poster2.jpg", kndSrc: "/assets/posters/knd/poster2.jpg", alt: "Valavaara Poster 2" },
   { id: 3, engSrc: "/assets/posters/eng/poster3.jpg", kndSrc: "/assets/posters/knd/poster3.jpg", alt: "Valavaara Poster 3" },
@@ -29,6 +45,11 @@ interface PosterCardProps {
   poster: Poster;
   index: number;
 }
+
+const getExtension = (url: string) => {
+  const parts = url.split('.');
+  return parts.length > 1 ? parts[parts.length - 1] : 'jpg';
+};
 
 function PosterCard({ poster, index }: PosterCardProps) {
   const [showKannada, setShowKannada] = useState(false);
@@ -62,12 +83,12 @@ function PosterCard({ poster, index }: PosterCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: Math.min(index * 0.05, 0.3) }}
-      className="relative group cursor-pointer"
+      className={`relative group cursor-pointer ${poster.gridSpan || ""}`}
       onMouseEnter={handleHover}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
-      <div className="card overflow-hidden relative aspect-[3/4]">
+      <div className={`card overflow-hidden relative ${poster.aspectRatio || "aspect-[3/4]"}`}>
         {/* Current language image */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -86,20 +107,23 @@ function PosterCard({ poster, index }: PosterCardProps) {
               className="object-cover"
               priority={index < 3}
               loading={index < 3 ? "eager" : "lazy"}
+              unoptimized={currentSrc.endsWith('.gif')}
             />
           </motion.div>
         </AnimatePresence>
         
         {/* Language indicator */}
-        <div className="absolute top-2 right-2 z-10">
-          <span className={`px-2 py-1 rounded-full text-xs font-bold transition-colors ${
-            showKannada 
-              ? "bg-orange-500 text-white" 
-              : "bg-white/90 text-gray-800"
-          }`}>
-            {currentLang}
-          </span>
-        </div>
+        {poster.engSrc !== poster.kndSrc && (
+          <div className="absolute top-2 right-2 z-10">
+            <span className={`px-2 py-1 rounded-full text-xs font-bold transition-colors ${
+              showKannada 
+                ? "bg-orange-500 text-white" 
+                : "bg-white/90 text-gray-800"
+            }`}>
+              {currentLang}
+            </span>
+          </div>
+        )}
 
         {/* Download buttons on hover */}
         <div 
@@ -109,7 +133,7 @@ function PosterCard({ poster, index }: PosterCardProps) {
         >
           <a
             href={poster.engSrc}
-            download={`valavaara-poster-${poster.id}-eng.jpg`}
+            download={`valavaara-poster-${poster.id}-eng.${getExtension(poster.engSrc)}`}
             className="bg-orange-500 hover:bg-orange-600 text-white text-[12px] py-0.5 px-1 rounded flex items-center gap-0.5"
             onClick={(e) => e.stopPropagation()}
           >
@@ -119,7 +143,7 @@ function PosterCard({ poster, index }: PosterCardProps) {
           {poster.engSrc !== poster.kndSrc && (
             <a
               href={poster.kndSrc}
-              download={`valavaara-poster-${poster.id}-knd.jpg`}
+              download={`valavaara-poster-${poster.id}-knd.${getExtension(poster.kndSrc)}`}
               className="bg-orange-500 hover:bg-orange-600 text-white text-[12px] py-0.5 px-1 rounded flex items-center gap-0.5"
               onClick={(e) => e.stopPropagation()}
             >

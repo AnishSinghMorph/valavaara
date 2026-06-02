@@ -248,6 +248,69 @@ export function PressKitClient() {
                         <PosterGallery showAll />
                     </motion.section>
 
+                    {/* Open Files Section */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.11 }}
+                        className="mb-10"
+                    >
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-xl font-bold flex items-center gap-2">
+                                <FileText size={20} className="text-primary" />
+                                Open Files
+                            </h2>
+                            <span className="text-sm text-foreground-muted">
+                                Source Files (PSD)
+                            </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
+                            <div className="card overflow-hidden">
+                                {/* Preview */}
+                                <div className="relative bg-white aspect-[1660/664] max-h-96 flex items-center justify-center overflow-hidden">
+                                    <NextImage
+                                        src="/assets/ZEE5/VLLR 1660 x 664-Zee5.jpg"
+                                        alt="Zee5 Banner PSD Preview"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 800px"
+                                        className="object-cover"
+                                    />
+
+                                    {/* PSD badge */}
+                                    <div className="absolute top-2 right-2">
+                                        <span className="px-2 py-1 rounded-full text-xs font-bold bg-blue-600 text-white">
+                                            PSD
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Actions */}
+                                <div className="p-4">
+                                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                                        <div>
+                                            <h3 className="font-bold text-sm mb-1">
+                                                Valavaara Zee5 Banner Source File
+                                            </h3>
+                                            <p className="text-xs text-foreground-muted">
+                                                Download the layered Photoshop PSD file (1660 x 664) for high-quality custom edits.
+                                            </p>
+                                        </div>
+
+                                        <a
+                                            href="/assets/ZEE5/VLLR 1660 x 664-Zee5.psd"
+                                            download="VLLR 1660 x 664-Zee5.psd"
+                                            className="btn btn-primary text-xs py-2 px-4 flex items-center gap-2 whitespace-nowrap w-full sm:w-auto justify-center animate-pulse-subtle"
+                                        >
+                                            <Download size={14} />
+                                            <span>Download PSD (45.2 MB)</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.section>
+
                     {/* Promotions Section */}
                     <motion.section
                         initial={{ opacity: 0, y: 20 }}
