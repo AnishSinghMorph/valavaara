@@ -455,13 +455,13 @@ export function PressKitClient() {
                         </h2>
 
                         <div
-                            className="aspect-video relative bg-black group cursor-pointer rounded-lg overflow-hidden card"
+                            className="aspect-[2293/1080] relative bg-black group cursor-pointer rounded-lg overflow-hidden card"
                             onClick={openOttModal}
                         >
                             <video
                                 ref={ottVideoRef}
                                 src="/assets/ZEE5/Vvlr Ott Video-Final.mp4"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain"
                                 muted={ottMuted}
                                 loop
                                 playsInline
