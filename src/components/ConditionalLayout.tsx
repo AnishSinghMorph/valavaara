@@ -2,35 +2,33 @@
 
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/Header";
-import { ReleaseMarquee } from "@/components/ReleaseMarquee";
 import { BookingBar } from "@/components/BookingBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function ConditionalLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const hideHeaderRoutes = ["/"];
-  const shouldHideHeader = hideHeaderRoutes.includes(pathname);
+  const isLanding = pathname === "/";
+  const [scrolledIntoMain, setScrolledIntoMain] = useState(false);
 
-  // Manage body overflow based on route
+  // On the landing page, the header stays hidden until the scroll-driven
+  // hero fades out and reveals the main content beneath it.
   useEffect(() => {
-    if (pathname === "/") {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [pathname]);
+    if (!isLanding) return;
+    setScrolledIntoMain(false);
+
+    const target = document.getElementById("landing-main-content");
+    if (!target) return;
+
+    const observer = new IntersectionObserver(([entry]) => setScrolledIntoMain(entry.isIntersecting));
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [isLanding]);
+
+  const shouldHideHeader = isLanding && !scrolledIntoMain;
 
   return (
     <>
-      {!shouldHideHeader && (
-        <>
-          <Header />
-          <ReleaseMarquee />
-        </>
-      )}
+      {!shouldHideHeader && <Header />}
       {children}
       {!shouldHideHeader && <BookingBar />}
     </>
