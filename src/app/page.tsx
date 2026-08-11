@@ -8,6 +8,19 @@ import MainPage from "@/app/main/page";
 
 const HERO_SCROLL_HEIGHT = "220vh";
 
+const RATING_BADGES = [
+  { src: "/Asset 1@2x.png", alt: "BookMyShow rates Valavaara 9.9/10" },
+  { src: "/Asset 2@2x.png", alt: "IMDb rates Valavaara 7.3/10" },
+  { src: "/Asset 3@2x.png", alt: "Critic rating 4/5" },
+  { src: "/Asset 4@2x.png", alt: "TV9 Kannada rates Valavaara 4/5" },
+  { src: "/Asset 5@2x.png", alt: "Times of India rates Valavaara 4/5" },
+  { src: "/Asset 6@2x.png", alt: "Critic rating 3.5/5" },
+  { src: "/Asset 7@2x.png", alt: "Critic rating 4/5" },
+  { src: "/Asset 8@2x.png", alt: "Critic rating 3.5/5" },
+  { src: "/Asset 9@2x.png", alt: "Critic rating 3.5/5" },
+  { src: "/Asset 10@2x.png", alt: "Critic rating 3.5/5" },
+];
+
 export default function LandingPage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -18,9 +31,9 @@ export default function LandingPage() {
   // Scroll cue fades out as soon as the user starts scrolling
   const indicatorOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
 
-  // TOI rating badge slides/fades in, holds, then fades out with the poster
-  const badgeOpacity = useTransform(scrollYProgress, [0.12, 0.32, 0.65, 0.88], [0, 1, 1, 0]);
-  const badgeY = useTransform(scrollYProgress, [0.12, 0.32], [24, 0]);
+  // Rating badges slide/fade in together, hold, then fade out with the poster
+  const badgesOpacity = useTransform(scrollYProgress, [0.12, 0.32, 0.65, 0.88], [0, 1, 1, 0]);
+  const badgesY = useTransform(scrollYProgress, [0.12, 0.32], [24, 0]);
 
   // Poster + overlay fade out near the end, revealing the main page underneath
   const posterOpacity = useTransform(scrollYProgress, [0.65, 0.95], [1, 0]);
@@ -56,18 +69,22 @@ export default function LandingPage() {
             <div className="absolute inset-0 bg-black/30" />
           </motion.div>
 
-          {/* Times of India 4/5 rating badge - revealed on scroll */}
+          {/* Rating badges - all revealed side by side on scroll.
+              Desktop-only: the mobile poster already has these baked into the artwork. */}
           <motion.div
-            style={{ opacity: badgeOpacity, y: badgeY }}
-            className="absolute inset-x-0 bottom-28 sm:bottom-32 z-20 flex justify-center px-6"
+            style={{ opacity: badgesOpacity, y: badgesY }}
+            className="absolute inset-x-0 bottom-28 z-20 hidden md:flex flex-wrap justify-center items-center gap-3 px-6 max-w-2xl mx-auto"
           >
-            <Image
-              src="/Asset 5@2x.png"
-              alt="Times of India rates Valavaara 4 out of 5"
-              width={355}
-              height={174}
-              className="w-40 sm:w-52 h-auto drop-shadow-2xl"
-            />
+            {RATING_BADGES.map((badge) => (
+              <Image
+                key={badge.src}
+                src={badge.src}
+                alt={badge.alt}
+                width={355}
+                height={174}
+                className="w-24 md:w-28 h-auto drop-shadow-2xl"
+              />
+            ))}
           </motion.div>
 
           {/* Bouncing scroll cue */}
