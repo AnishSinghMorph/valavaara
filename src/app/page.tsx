@@ -44,7 +44,7 @@ export default function LandingPage() {
 
             {/* Full-screen poster background - Desktop */}
             <Image
-              src="/assets/images/Web Preview.png"
+              src="/assets/images/Web Preview.jpg"
               alt="Valavaara Movie Poster"
               fill
               className="object-cover hidden md:block"
